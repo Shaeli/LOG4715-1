@@ -8,17 +8,19 @@ public class CameraFollow : MonoBehaviour
 	public float xSmooth = 8f;		// How smoothly the camera catches up with it's target movement in the x axis.
 	public float ySmooth = 8f;		// How smoothly the camera catches up with it's target movement in the y axis.
 	public Vector2 maxXAndY;		// The maximum x and y coordinates the camera can have.
-	public Vector2 minXAndY;		// The minimum x and y coordinates the camera can have.
+	public Vector2 minXAndY;        // The minimum x and y coordinates the camera can have.
 
+    [SerializeField] PlatformerCharacter2D player_cam;
+  
 
-	private Transform player;		// Reference to the player's transform.
+    private Transform player;		// Reference to the player's transform.
 
 
 	void Awake ()
 	{
 		// Setting up the reference.
 		player = GameObject.FindGameObjectWithTag("Player").transform;
-	}
+    }
 
 
 	bool CheckXMargin()
@@ -37,7 +39,7 @@ public class CameraFollow : MonoBehaviour
 
 	void Update ()
 	{
-		TrackPlayer();
+        TrackPlayer();
 	}
 	
 	
@@ -61,7 +63,16 @@ public class CameraFollow : MonoBehaviour
 		targetX = Mathf.Clamp(targetX, minXAndY.x, maxXAndY.x);
 		targetY = Mathf.Clamp(targetY, minXAndY.y, maxXAndY.y);
 
-		// Set the camera's position to the target position with the same z component.
-		transform.position = new Vector3(targetX, targetY, transform.position.z);
+        // Set the camera's position to the target position with the same z component.
+ 
+        if (player_cam.Grounded)
+        {
+            transform.position = new Vector3(targetX, targetY, transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
+        }
+		
 	}
 }
