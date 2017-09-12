@@ -26,7 +26,7 @@ public class Platformer2DUserControl : MonoBehaviour
 	void FixedUpdate()
 	{
         // Read the inputs.
-        bool crouch = Input.GetKey(KeyCode.LeftControl);
+        bool crouch = Input.GetButton("Crouch");
 		#if CROSS_PLATFORM_INPUT
 		float h = CrossPlatformInput.GetAxis("Horizontal");
 		#else
