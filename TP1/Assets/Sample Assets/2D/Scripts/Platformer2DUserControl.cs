@@ -14,7 +14,7 @@ public class Platformer2DUserControl : MonoBehaviour
 
     void Update ()
     {
-        // Read the jump input in Update so button presses aren't missed.
+        // Read the jump down/up and crouch input in Update so button presses aren't missed.
 #if CROSS_PLATFORM_INPUT
         if (CrossPlatformInput.GetButtonDown("Jump")) jump = true;
         if (CrossPlatformInput.GetButton("Crouch")) crouch = true;

@@ -52,8 +52,6 @@ public class PlatformerCharacter2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump, bool jumpUp)
 	{
-
-        
         // If crouching, check to see if the character can stand up
         if (!crouch && anim.GetBool("Crouch"))
 		{
@@ -87,23 +85,18 @@ public class PlatformerCharacter2D : MonoBehaviour
 				Flip();
         }
 
+        // Increment jump force while crouch & jump are held
         if (grounded && crouch && CrossPlatformInput.GetButton("Jump") && (currentForceJump < maxJumpForce))
         {
             currentForceJump += 5f;
         }
 
-        /*else if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.LeftControl))
-        {
-              //    anim.SetBool("Ground", false);
-              //  GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, currentForceJump));
-        }*/
-
-        Debug.Log("ground:" + grounded + " jump:" + jump + " jump up:" + jumpUp + " crouch:" + crouch);
         // If the player should jump from ground...
         if (grounded && ((jump && !crouch) || (crouch && jumpUp))) {
-            // Add a vertical force to the player.
+            
             nb_jump = jumpNumber;
             anim.SetBool("Ground", false);
+            // Add a vertical force to the player.
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, currentForceJump));
 
