@@ -50,7 +50,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump)
+	public void Move(float move, bool crouch, bool jump, bool jumpUp)
 	{
 
         
@@ -85,30 +85,33 @@ public class PlatformerCharacter2D : MonoBehaviour
 			else if(move < 0 && facingRight)
 				// ... flip the player.
 				Flip();
-
-            if (crouch && CrossPlatformInput.GetButton("Jump") && (currentForceJump < maxJumpForce))
-            {
-                currentForceJump += 50f;
-            }
-
-            /*else if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.LeftControl))
-            {
-                  //    anim.SetBool("Ground", false);
-                  //  GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, currentForceJump));
-            }*/
-
         }
 
-        // If the player should jump...
-        if (grounded && jump && !crouch) {
+        if (grounded && crouch && CrossPlatformInput.GetButton("Jump") && (currentForceJump < maxJumpForce))
+        {
+            currentForceJump += 5f;
+        }
+
+        /*else if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.LeftControl))
+        {
+              //    anim.SetBool("Ground", false);
+              //  GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, currentForceJump));
+        }*/
+
+        Debug.Log("ground:" + grounded + " jump:" + jump + " jump up:" + jumpUp + " crouch:" + crouch);
+        // If the player should jump from ground...
+        if (grounded && ((jump && !crouch) || (crouch && jumpUp))) {
             // Add a vertical force to the player.
             nb_jump = jumpNumber;
             anim.SetBool("Ground", false);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, currentForceJump));
+
             nb_jump--;
+            // Reset current jump force
             currentForceJump = jumpForce;
-        }
+        } 
+
         if (!grounded && nb_jump > 0 && jump) {
             nb_jump--;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
