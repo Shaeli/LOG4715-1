@@ -43,5 +43,6 @@ public class Platformer2DUserControl : MonoBehaviour
         // Reset the jump input once it has been used.
 	    jump = false;
         jumpUp = false;
+        crouch = false;
 	}
 }
