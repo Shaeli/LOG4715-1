@@ -15,11 +15,18 @@ public class PlatformerCharacter2D : MonoBehaviour
 	[SerializeField] float crouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	
 	[SerializeField] bool airControl = false;			// Whether or not a player can steer while jumping;
-	[SerializeField] LayerMask whatIsGround;			// A mask determining what is ground to the character
-	
-	Transform groundCheck;								// A position marking where to check if the player is grounded.
-	float groundedRadius = .2f;							// Radius of the overlap circle to determine if grounded
+	[SerializeField] LayerMask whatIsGround;            // A mask determining what is ground to the character
+    [SerializeField] LayerMask whatIsWall;
+
+    Transform groundCheck;								// A position marking where to check if the player is grounded.
+	float groundedRadius = .5f;							// Radius of the overlap circle to determine if grounded
 	bool grounded = false;								// Whether or not the player is grounded.
+
+    Transform wallCheck;
+    float wallRadius = .2f;
+    bool sided = false;
+    int cpt;
+
     public bool Grounded { get { return grounded; }
     }
     Transform ceilingCheck;								// A position marking where to check for ceilings
@@ -33,9 +40,11 @@ public class PlatformerCharacter2D : MonoBehaviour
 		// Setting up references.
 		groundCheck = transform.Find("GroundCheck");
 		ceilingCheck = transform.Find("CeilingCheck");
-		anim = GetComponent<Animator>();
+        wallCheck = transform.Find("WallCheck");
+        anim = GetComponent<Animator>();
         nb_jump = jumpNumber;
         currentForceJump = jumpForce;
+        cpt = 0;
     }
 
 
@@ -44,9 +53,9 @@ public class PlatformerCharacter2D : MonoBehaviour
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
 		anim.SetBool("Ground", grounded);
-
-		// Set the vertical animation
-		anim.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
+        sided = Physics2D.OverlapCircle(wallCheck.position, wallRadius, whatIsWall);
+        // Set the vertical animation
+        anim.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
 	}
 
 
@@ -64,7 +73,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 		anim.SetBool("Crouch", crouch);
 
 		//only control the player if grounded or airControl is turned on
-		if(grounded || airControl)
+		if(grounded || airControl && cpt==0 )
 		{
 			// Reduce the speed if crouching by the crouchSpeed multiplier
 			move = (crouch ? move * crouchSpeed : move);
@@ -87,13 +96,12 @@ public class PlatformerCharacter2D : MonoBehaviour
 
         // Increment jump force while crouch & jump are held
         if (grounded && crouch && CrossPlatformInput.GetButton("Jump") && (currentForceJump < maxJumpForce))
-        {
+        {   
             currentForceJump += 5f;
         }
 
         // If the player should jump from ground...
         if (grounded && ((jump && !crouch) || (crouch && jumpUp))) {
-            
             nb_jump = jumpNumber;
             anim.SetBool("Ground", false);
             // Add a vertical force to the player.
@@ -104,11 +112,31 @@ public class PlatformerCharacter2D : MonoBehaviour
             // Reset current jump force
             currentForceJump = jumpForce;
         } 
+        if (!grounded && sided && jump)
+        {
+            cpt = 30;   
+            if(facingRight)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                Flip();
+                GetComponent<Rigidbody2D>().AddForce((new Vector2(-1f, 2f) * jumpForce) / 1.5f);
+            } else if(!facingRight)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                Flip(); 
+                GetComponent<Rigidbody2D>().AddForce((new Vector2(1f, 2f) * jumpForce) / 1.5f);
+            }
+        }
+        
+        if (!grounded && nb_jump > 0 && jump && !sided) {
 
-        if (!grounded && nb_jump > 0 && jump) {
             nb_jump--;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, currentForceJump));
+        }
+        if (cpt != 0)
+        {
+            cpt--;
         }
 
 
