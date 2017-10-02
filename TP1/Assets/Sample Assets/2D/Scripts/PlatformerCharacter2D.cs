@@ -5,8 +5,9 @@ public class PlatformerCharacter2D : MonoBehaviour
 	bool facingRight = true;							// For determining which way the player is currently facing.
 	[SerializeField] float maxSpeed = 10f;				// The fastest the player can travel in the x axis.
 	[SerializeField] float jumpForce = 400f;			// Amount of force added when the player 
-    [SerializeField] int jumpNumber = 2;                  // Max jumps possible in a row.
-    [SerializeField] float maxJumpForce = 1800f;         // Amount max of force added when the player keep the jump input pressed.
+    [SerializeField] int jumpNumber = 2;                // Max jumps possible in a row.
+    [SerializeField] float maxJumpForce = 1800f;        // Amount max of force added when the player keep the jump input pressed.
+    [SerializeField] int wallJumpDelay = 30;            // Number of frames before regaining control after a wall jump
     int nb_jump;
     float currentForceJump;
     float timer;                                        //Amount of time key pressed.
@@ -25,7 +26,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     Transform wallCheck;
     float wallRadius = .2f;
     bool sided = false;
-    int cpt;
+    int currentWallJumpDelay;
 
     public bool Grounded { get { return grounded; }
     }
@@ -44,7 +45,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         anim = GetComponent<Animator>();
         nb_jump = jumpNumber;
         currentForceJump = jumpForce;
-        cpt = 0;
+        currentWallJumpDelay = 0;
     }
 
 
@@ -59,7 +60,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump, bool jumpUp)
+	public void Move(float move, bool crouch, bool jump, bool jumpUp, bool crouchUp)
 	{
         // If crouching, check to see if the character can stand up
         if (!crouch && anim.GetBool("Crouch"))
@@ -72,8 +73,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 		// Set whether or not the character is crouching in the animator
 		anim.SetBool("Crouch", crouch);
 
-		//only control the player if grounded or airControl is turned on
-		if(grounded || airControl && cpt==0 )
+		// Only control the player if grounded or airControl is turned on
+		if(grounded || airControl && currentWallJumpDelay == 0 )
 		{
 			// Reduce the speed if crouching by the crouchSpeed multiplier
 			move = (crouch ? move * crouchSpeed : move);
@@ -100,8 +101,9 @@ public class PlatformerCharacter2D : MonoBehaviour
             currentForceJump += 5f;
         }
 
-        // If the player should jump from ground...
-        if (grounded && ((jump && !crouch) || (crouch && jumpUp))) {
+        // If the player should jump from ground... (grounded + (regular jump / release jump while crouch / release crouch after charging))
+        if (grounded && ((jump && !crouch) || (crouch && jumpUp) || (crouchUp && currentForceJump > jumpForce)))
+        {
             nb_jump = jumpNumber;
             anim.SetBool("Ground", false);
             // Add a vertical force to the player.
@@ -112,9 +114,12 @@ public class PlatformerCharacter2D : MonoBehaviour
             // Reset current jump force
             currentForceJump = jumpForce;
         } 
+        // Wall jump
         if (!grounded && sided && jump)
         {
-            cpt = 30;   
+            nb_jump = jumpNumber;
+            nb_jump--;
+            currentWallJumpDelay = wallJumpDelay;   
             if(facingRight)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
@@ -128,15 +133,18 @@ public class PlatformerCharacter2D : MonoBehaviour
             }
         }
         
+        // Mid-air jump
         if (!grounded && nb_jump > 0 && jump && !sided) {
 
             nb_jump--;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, currentForceJump));
         }
-        if (cpt != 0)
+
+        // Decrement delay after wall jump
+        if (currentWallJumpDelay != 0)
         {
-            cpt--;
+            currentWallJumpDelay--;
         }
 
 
