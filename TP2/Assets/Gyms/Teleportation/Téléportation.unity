@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -334,6 +334,22 @@ GameObject:
   m_PrefabParentObject: {fileID: 1968476592218994, guid: 313ad0ef31f75b84f9f31c0528802fdd,
     type: 2}
   m_PrefabInternal: {fileID: 754077049}
+--- !u!114 &659859232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 659859231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3105ba9e0e5f92c418138c60dc647197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 5
+  JumpForce: 8
+  WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &659859233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,13 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfe522a46eec0645a8b2f07cd4804ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
   CoolDownTeleportation: 250
   TeleportationDistance: 3
-  JumpForce: 8
-  WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!65 &659859234
 BoxCollider:
   m_ObjectHideFlags: 0

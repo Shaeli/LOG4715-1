@@ -11,7 +11,7 @@ public class PlayerControler : MonoBehaviour
 
     // Déclaration des variables
     bool _Grounded { get; set; }
-    bool _Flipped { get; set; }
+    public bool _Flipped { get; set; }
     Animator _Anim { get; set; }
     Rigidbody _Rb { get; set; }
     Camera _MainCamera { get; set; }
