@@ -12,7 +12,6 @@ public class ScriptFloating : MonoBehaviour {
     [SerializeField] Image FloatingImagefill;
 
     float currentFloatingTime;
-    float currentCoolDownTime;
 
     // Boolean pour activer le cooldown
     bool coolDown;
