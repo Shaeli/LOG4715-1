@@ -8,11 +8,12 @@ public class WallGlueScript : MonoBehaviour {
     [SerializeField] float GlueTime = 3.0f;
     [SerializeField] float RefillSpeed = 1f;
     [SerializeField] Image GlueImageFill;
+    [SerializeField] float jumpForce=4;
 
     Transform wallCheck;
     float wallRadius = .2f;
-    bool sided = false;
-
+    bool sided;
+    bool stuck;
     float currentGlueTime;
 
     bool coolDown;
@@ -20,6 +21,8 @@ public class WallGlueScript : MonoBehaviour {
 
         wallCheck = transform.Find("WallCheck");
         coolDown = false;
+        sided = false;
+        stuck = false;
         currentGlueTime = GlueTime;
         GlueImageFill.fillAmount = 1;
     }
@@ -29,6 +32,7 @@ public class WallGlueScript : MonoBehaviour {
         CheckSided();
         GlueCoolDown();
         CheckWallGlue();
+      //  CheckJump();
     }
     public void CheckSided()
     {
@@ -53,6 +57,7 @@ public class WallGlueScript : MonoBehaviour {
             if (currentGlueTime >= GlueTime)
             {
                 coolDown = false;
+                stuck = false;
             }
         }
     }
@@ -67,11 +72,31 @@ public class WallGlueScript : MonoBehaviour {
             {
                 coolDown = true;
             }
+            stuck = true;
+
         }
-        else if (currentGlueTime < GlueTime)
+       else if (currentGlueTime < GlueTime)
         {
+            stuck = true;
             coolDown = true;
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
+   /* public void CheckJump()
+    {
+        if (stuck && Input.GetButton("Jump"))
+        {
+
+            if (gameObject.GetComponent<PlayerControler>()._Flipped)
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+                GetComponent<Rigidbody>().AddForce((new Vector3(1f,1f, 2f) * jumpForce) / 1.5f);
+            }
+            else if (!gameObject.GetComponent<PlayerControler>()._Flipped)
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+                GetComponent<Rigidbody>().AddForce((new Vector3(1f, 1f, 2f) * -jumpForce) / 1.5f);
+            }
+        }
+    }*/
 }

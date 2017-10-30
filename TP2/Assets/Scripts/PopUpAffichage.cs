@@ -43,30 +43,30 @@ public class PopUpAffichage : MonoBehaviour {
     {
         if(Input.GetButtonDown("FlecheHaut") && CoolDownAffichagetmp==0)
         {
-            if(gameObject.GetComponent<PlayerControler>()._Flipped)
-            {
-                images[0].SetActive(true);
-                CoolDownAffichagetmp = CoolDownAffichage;
-            }
-            else
-            {
-               images[1].SetActive(true);
+         
+               images[0].SetActive(true);
                CoolDownAffichagetmp = CoolDownAffichage;
-            }
+
+            
             
         }
         if(Input.GetButtonDown("FlecheBas") && CoolDownAffichagetmp == 0)
         {
-            if (gameObject.GetComponent<PlayerControler>()._Flipped)
-            {
-                images[2].SetActive(true);
+                images[1].SetActive(true);
                 CoolDownAffichagetmp = CoolDownAffichage;
-            }
-            else
-            {
-                images[3].SetActive(true);
-                CoolDownAffichagetmp = CoolDownAffichage;
-            }
+
+        }
+        if (Input.GetButtonDown("Jumpopup") && CoolDownAffichagetmp == 0)
+        {
+            images[2].SetActive(true);
+            CoolDownAffichagetmp = CoolDownAffichage;
+
+        }
+        if (Input.GetButtonDown("Merci") && CoolDownAffichagetmp == 0)
+        {
+            images[3].SetActive(true);
+            CoolDownAffichagetmp = CoolDownAffichage;
+
         }
     }
 }
