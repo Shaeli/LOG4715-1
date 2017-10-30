@@ -15,6 +15,7 @@ public class PlayerControler : MonoBehaviour
     Animator _Anim { get; set; }
     Rigidbody _Rb { get; set; }
     Camera _MainCamera { get; set; }
+    public int decompte { get; set; }
 
     // Valeurs exposées
     [SerializeField]
@@ -45,7 +46,15 @@ public class PlayerControler : MonoBehaviour
     void Update()
     {
         var horizontal = Input.GetAxis("Horizontal") * MoveSpeed;
-        HorizontalMove(horizontal);
+        if (decompte==0)
+        {
+           
+            HorizontalMove(horizontal);
+        }
+        else
+        {
+            decompte--;
+        }
         FlipCharacter(horizontal);
         CheckJump();
     }
@@ -73,7 +82,7 @@ public class PlayerControler : MonoBehaviour
     }
 
     // Gère l'orientation du joueur et les ajustements de la camera
-    void FlipCharacter(float horizontal)
+    public void FlipCharacter(float horizontal)
     {
         if (horizontal < 0 && !_Flipped)
         {

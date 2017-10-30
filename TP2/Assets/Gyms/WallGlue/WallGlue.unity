@@ -367,7 +367,7 @@ MonoBehaviour:
   GlueTime: 3
   RefillSpeed: 1
   GlueImageFill: {fileID: 2078585084}
-  jumpForce: 4
+  jumpForce: 300
 --- !u!65 &659859234
 BoxCollider:
   m_ObjectHideFlags: 0

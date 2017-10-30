@@ -15,6 +15,7 @@ public class WallGlueScript : MonoBehaviour {
     bool sided;
     bool stuck;
     float currentGlueTime;
+    public bool jump { get; set; }
 
     bool coolDown;
     void Start () {
@@ -23,16 +24,38 @@ public class WallGlueScript : MonoBehaviour {
         coolDown = false;
         sided = false;
         stuck = false;
+        jump = false;
         currentGlueTime = GlueTime;
         GlueImageFill.fillAmount = 1;
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (jump)
+        {
+            if (gameObject.GetComponent<PlayerControler>()._Flipped)
+            {
+                
+                GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 1f, 2f) * jumpForce) / 1.5f);
+                gameObject.GetComponent<PlayerControler>().FlipCharacter(1);
+
+            }
+            else if (!gameObject.GetComponent<PlayerControler>()._Flipped)
+            {
+
+                GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 1f, -2f) * jumpForce) / 1.5f);
+                gameObject.GetComponent<PlayerControler>().FlipCharacter(-1);
+            }
+            jump = false;
+            gameObject.GetComponent<PlayerControler>().decompte = 6;
+        }
         CheckSided();
         GlueCoolDown();
         CheckWallGlue();
-      //  CheckJump();
+        CheckJump();
     }
     public void CheckSided()
     {
@@ -63,7 +86,7 @@ public class WallGlueScript : MonoBehaviour {
     }
     public void CheckWallGlue()
     {
-        if(Input.GetButton("Glue") && sided && !coolDown)
+        if(Input.GetButton("Glue") && sided && !coolDown && !jump)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentGlueTime -= Time.deltaTime;
@@ -82,12 +105,12 @@ public class WallGlueScript : MonoBehaviour {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
-   /* public void CheckJump()
+    public void CheckJump()
     {
         if (stuck && Input.GetButton("Jump"))
         {
-
-            if (gameObject.GetComponent<PlayerControler>()._Flipped)
+            jump = true;
+          /*  if (gameObject.GetComponent<PlayerControler>()._Flipped)
             {
                 GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                 GetComponent<Rigidbody>().AddForce((new Vector3(1f,1f, 2f) * jumpForce) / 1.5f);
@@ -96,7 +119,7 @@ public class WallGlueScript : MonoBehaviour {
             {
                 GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                 GetComponent<Rigidbody>().AddForce((new Vector3(1f, 1f, 2f) * -jumpForce) / 1.5f);
-            }
+            }*/
         }
-    }*/
+    }
 }
