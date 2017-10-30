@@ -7,6 +7,8 @@ public class ScriptFloating : MonoBehaviour {
 
     // Temps que le joueur peut rester dans l'air
     [SerializeField] float FloatingTime = 3.0f;
+    // Temps du recharge par rapport au FloatingTime. Plus c'est eleve, plus le temps recharge est court.
+    [SerializeField] float RefillSpeed = 1f;
     [SerializeField] Image FloatingImagefill;
 
     float currentFloatingTime;
@@ -60,7 +62,7 @@ public class ScriptFloating : MonoBehaviour {
     {
         if (coolDown)
         {
-            currentFloatingTime += Time.deltaTime; 
+            currentFloatingTime += Time.deltaTime * RefillSpeed; 
             FloatingImagefill.GetComponent<Image>().fillAmount = currentFloatingTime / FloatingTime; 
 
 
