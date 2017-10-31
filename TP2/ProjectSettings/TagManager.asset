@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Diamonds
   - Wall
+  - Shield
   layers:
   - Default
   - TransparentFX
