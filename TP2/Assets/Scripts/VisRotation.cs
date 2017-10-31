@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiamondsRotation : MonoBehaviour {
+public class VisRotation : MonoBehaviour {
 
 
 	// Update is called once per frame
