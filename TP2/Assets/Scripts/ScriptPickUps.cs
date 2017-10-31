@@ -18,12 +18,18 @@ public class ScriptPickUps : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       if (other.gameObject.CompareTag("Diamonds"))
+       if (other.gameObject.CompareTag("Vis"))
        {
           other.gameObject.SetActive(false);
           score++;
           SetCountText();
        }
+        if (other.gameObject.CompareTag("VisOr"))
+        {
+            other.gameObject.SetActive(false);
+            score+=3;
+            SetCountText();
+        }
     }
 
     void SetCountText()

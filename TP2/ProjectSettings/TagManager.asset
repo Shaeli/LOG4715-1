@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Diamonds
   - Wall
+  - Vis
+  - VisOr
   layers:
   - Default
   - TransparentFX
