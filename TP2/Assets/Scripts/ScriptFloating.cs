@@ -20,6 +20,13 @@ public class ScriptFloating : MonoBehaviour {
     void Start () {
         coolDown = false;
         FloatingImagefill.fillAmount = 1;
+
+        // Verification pour les valeurs negatives
+        if (FloatingTime < 0)
+            FloatingTime = 3f;
+
+        if (RefillSpeed <= 0)
+            RefillSpeed = 1f;
         currentFloatingTime = FloatingTime;
     }
 	

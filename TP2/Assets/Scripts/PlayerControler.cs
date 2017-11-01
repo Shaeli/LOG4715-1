@@ -11,6 +11,8 @@ public class PlayerControler : MonoBehaviour
 
     // Déclaration des variables
     bool _Grounded { get; set; }
+    bool _Floor { get; set; }
+    bool _Player { get; set; }
     public bool _Flipped { get; set; }
     Animator _Anim { get; set; }
     Rigidbody _Rb { get; set; }
@@ -27,6 +29,9 @@ public class PlayerControler : MonoBehaviour
     [SerializeField]
     LayerMask WhatIsGround;
 
+    [SerializeField]
+    float PiledJumpMultiplier = 1.5f;
+
     // Awake se produit avait le Start. Il peut être bien de régler les références dans cette section.
     void Awake()
     {
@@ -40,15 +45,19 @@ public class PlayerControler : MonoBehaviour
     {
         _Grounded = false;
         _Flipped = false;
+        // Check pour PiledJumpMultiplier nul ou negatif 
+        if (PiledJumpMultiplier <= 0)
+            PiledJumpMultiplier = 1; // Forcer la valeur a 1
     }
+
 
     // Vérifie les entrées de commandes du joueur
     void Update()
     {
         var horizontal = Input.GetAxis("Horizontal") * MoveSpeed;
-        if (decompte==0)
+        if (decompte == 0)
         {
-           
+
             HorizontalMove(horizontal);
         }
         else
@@ -73,7 +82,12 @@ public class PlayerControler : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump"))
             {
-                _Rb.AddForce(new Vector3(0, JumpForce, 0), ForceMode.Impulse);
+                // If piled jump, add a force
+                if (_Player && !_Floor)
+                    _Rb.AddForce(new Vector3(0, JumpForce * PiledJumpMultiplier, 0), ForceMode.Impulse);
+                else
+                    _Rb.AddForce(new Vector3(0, JumpForce, 0), ForceMode.Impulse);
+
                 _Grounded = false;
                 _Anim.SetBool("Grounded", false);
                 _Anim.SetBool("Jump", true);
@@ -102,10 +116,21 @@ public class PlayerControler : MonoBehaviour
 
     // Collision avec le sol
     void OnCollisionEnter(Collision coll)
-    {        
-        // On s'assure de bien être en contact avec le sol
+    {
+        // On s'assure de bien être en contact avec le sol ou le player
         if ((WhatIsGround & (1 << coll.gameObject.layer)) == 0)
             return;
+
+        // On verifie si le joueur est en contact avec un autre joueur ou pas (pour saut empile)
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
+            _Player = true;
+        else
+            _Player = false;
+
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Floor"))
+            _Floor = true;
+        else
+            _Floor = false;
 
         // Évite une collision avec le plafond
         if (coll.relativeVelocity.y > 0)
