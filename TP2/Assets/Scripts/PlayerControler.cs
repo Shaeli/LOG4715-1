@@ -54,17 +54,17 @@ public class PlayerControler : MonoBehaviour
     // Vérifie les entrées de commandes du joueur
     void Update()
     {
-        var horizontal = Input.GetAxis("Horizontal") * MoveSpeed;
         if (decompte == 0)
         {
-
+            var horizontal = Input.GetAxis("Horizontal") * MoveSpeed;
             HorizontalMove(horizontal);
+            FlipCharacter(horizontal);
         }
         else
         {
             decompte--;
         }
-        FlipCharacter(horizontal);
+      
         CheckJump();
     }
 

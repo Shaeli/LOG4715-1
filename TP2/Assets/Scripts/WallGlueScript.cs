@@ -15,7 +15,7 @@ public class WallGlueScript : MonoBehaviour {
     bool sided;
     bool stuck;
     float currentGlueTime;
-    public bool jump { get; set; }
+    public bool wallJump { get; set; }
 
     bool coolDown;
     void Start () {
@@ -24,7 +24,7 @@ public class WallGlueScript : MonoBehaviour {
         coolDown = false;
         sided = false;
         stuck = false;
-        jump = false;
+        wallJump = false;
         currentGlueTime = GlueTime;
         GlueImageFill.fillAmount = 1;
     }
@@ -32,13 +32,23 @@ public class WallGlueScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (jump)
+        CheckSautMural();
+        CheckSided();
+        GlueCoolDown();
+        CheckJump();
+        CheckWallGlue();
+        
+    }
+
+    public void CheckSautMural()
+    {
+        if (wallJump)
         {
             if (gameObject.GetComponent<PlayerControler>()._Flipped)
             {
-                
+
                 GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 1f, 2f) * jumpForce) / 1.5f);
+                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 1.5f, 2f) * jumpForce) / 1.5f);
                 gameObject.GetComponent<PlayerControler>().FlipCharacter(1);
 
             }
@@ -46,16 +56,13 @@ public class WallGlueScript : MonoBehaviour {
             {
 
                 GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 1f, -2f) * jumpForce) / 1.5f);
+                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 1.5f, -2f) * jumpForce) / 1.5f);
                 gameObject.GetComponent<PlayerControler>().FlipCharacter(-1);
             }
-            jump = false;
-            gameObject.GetComponent<PlayerControler>().decompte = 6;
+            wallJump = false;
+            stuck = false;
+            gameObject.GetComponent<PlayerControler>().decompte = 15;
         }
-        CheckSided();
-        GlueCoolDown();
-        CheckWallGlue();
-        CheckJump();
     }
     public void CheckSided()
     {
@@ -80,13 +87,13 @@ public class WallGlueScript : MonoBehaviour {
             if (currentGlueTime >= GlueTime)
             {
                 coolDown = false;
-                stuck = false;
             }
         }
     }
+
     public void CheckWallGlue()
     {
-        if(Input.GetButton("Glue") && sided && !coolDown && !jump)
+        if(Input.GetButton("Glue") && sided && !coolDown)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentGlueTime -= Time.deltaTime;
@@ -94,13 +101,14 @@ public class WallGlueScript : MonoBehaviour {
             if (currentGlueTime <= 0)
             {
                 coolDown = true;
+                stuck = false;
             }
             stuck = true;
 
         }
        else if (currentGlueTime < GlueTime)
         {
-            stuck = true;
+            stuck = false;
             coolDown = true;
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
@@ -109,17 +117,8 @@ public class WallGlueScript : MonoBehaviour {
     {
         if (stuck && Input.GetButton("Jump"))
         {
-            jump = true;
-          /*  if (gameObject.GetComponent<PlayerControler>()._Flipped)
-            {
-                GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-                GetComponent<Rigidbody>().AddForce((new Vector3(1f,1f, 2f) * jumpForce) / 1.5f);
-            }
-            else if (!gameObject.GetComponent<PlayerControler>()._Flipped)
-            {
-                GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-                GetComponent<Rigidbody>().AddForce((new Vector3(1f, 1f, 2f) * -jumpForce) / 1.5f);
-            }*/
+            wallJump = true;
         }
     }
+
 }
