@@ -1322,7 +1322,7 @@ MonoBehaviour:
   JumpForce: 8
   WhatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
 --- !u!124 &124756192524183858
 Behaviour:
   m_ObjectHideFlags: 1
