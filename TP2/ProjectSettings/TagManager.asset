@@ -9,6 +9,8 @@ TagManager:
   - Shield
   - Vis
   - VisOr
+  - TpDroite
+  - TpGauche
   layers:
   - Default
   - TransparentFX
