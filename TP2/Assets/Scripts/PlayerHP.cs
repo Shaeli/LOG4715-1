@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour {
 
-    [SerializeField]
     int StartingHP = 3;
 
-    [SerializeField]
+    [SerializeField][Range(0,1)]
     float HealthBarAnimationRate = 0.5f;
 
     public Image HealthBar;

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DebugHPScript : MonoBehaviour {
 
+    [Range(0,10)]
     public int ReloadDelay = 3;
 
     private bool isDead = false;
