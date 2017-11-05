@@ -12,20 +12,23 @@ public class ScriptTeleportation : MonoBehaviour
     [SerializeField] float RefillSpeed = 1f;
     [SerializeField] Image FloatingImagefill;
 
-    [SerializeField] GameObject showTPRight;
-    [SerializeField] GameObject showTPLeft;
+    [SerializeField] GameObject TPGhost;
+
     bool coolDown;
+
+    bool buttonDown = false;
+
+    bool rotateOnce = false;
+
     //Distance téléportation
-    [SerializeField]
-    float TeleportationDistance = 5f;
+    [SerializeField] float TeleportationDistance = 5f;
 
     float Refill;
 
     // Awake se produit avait le Start. Il peut être bien de régler les références dans cette section.
     void Awake()
     {
-        showTPRight.SetActive(false);
-        showTPLeft.SetActive(false);
+        TPGhost.SetActive(false);
         coolDown = false;
         FloatingImagefill.fillAmount = 1;
     }
@@ -44,16 +47,7 @@ public class ScriptTeleportation : MonoBehaviour
       {
         if (Input.GetButtonDown("Teleportation"))
         {
-          if (gameObject.GetComponent<PlayerControler>()._Flipped)
-          {
-            showTPLeft.transform.position += new Vector3(-TeleportationDistance * 50, 0, 0);
-            showTPLeft.SetActive(true);
-          }
-          else
-          {
-            showTPRight.transform.position += new Vector3(TeleportationDistance * 50, 0, 0);
-            showTPRight.SetActive(true);
-          }
+          buttonDown = true;
         }
         if (Input.GetButtonUp("Teleportation"))
         {
@@ -62,18 +56,21 @@ public class ScriptTeleportation : MonoBehaviour
             transform.position += new Vector3(0, 0, -TeleportationDistance);
             FloatingImagefill.GetComponent<Image>().fillAmount = 0;
             coolDown = true;
-            showTPLeft.SetActive(false);
-            showTPRight.SetActive(false);
+            TPGhost.SetActive(false);
+            buttonDown = false;
+            rotateOnce = false;
           }
           else
           {
             transform.position += new Vector3(0, 0, TeleportationDistance);
             FloatingImagefill.GetComponent<Image>().fillAmount = 0;
             coolDown = true;
-            showTPRight.SetActive(false);
-            showTPLeft.SetActive(false);
+            TPGhost.SetActive(false);
+            buttonDown = false;
+            rotateOnce = false;
           }
         }
+        DisplayTpGhost(buttonDown);
       }
     }
 
@@ -89,6 +86,32 @@ public class ScriptTeleportation : MonoBehaviour
                 Refill = 0;
             }
         }
+    }
 
+    void DisplayTpGhost(bool buttonDown)
+    {
+      if (buttonDown)
+      {
+        if (gameObject.GetComponent<PlayerControler>()._Flipped)
+        {
+          if (!rotateOnce)
+          {
+            TPGhost.transform.Rotate(new Vector3(0, 180, 0));
+            rotateOnce = true;
+          }
+          TPGhost.transform.position = transform.position + new Vector3(0, 0, -TeleportationDistance);
+          TPGhost.SetActive(true);
+        }
+        else
+        {
+          if (rotateOnce)
+          {
+            TPGhost.transform.Rotate(new Vector3(0, 180, 0));
+            rotateOnce = false;
+          }
+          TPGhost.transform.position = transform.position + new Vector3(0, 0, TeleportationDistance);
+          TPGhost.SetActive(true);
+        }
+      }
     }
 }
