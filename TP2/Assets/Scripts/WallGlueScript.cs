@@ -34,7 +34,6 @@ public class WallGlueScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log("Floor est : " + pControler._Floor);
         CheckSautMural();
         CheckSided();
         GlueCoolDown();
