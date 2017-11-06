@@ -15,10 +15,13 @@ public class ScriptFloating : MonoBehaviour {
 
     // Boolean pour activer le cooldown
     bool coolDown;
+    // Boolean pour verifier si le cooldown est epuise
+    bool canFloat;
 
     // Use this for initialization
     void Start () {
         coolDown = false;
+        canFloat = true;
         FloatingImagefill.fillAmount = 1;
 
         // Verification pour les valeurs negatives
@@ -42,7 +45,7 @@ public class ScriptFloating : MonoBehaviour {
 
     void Float()
     {
-        if (Input.GetButton("Ability") && currentFloatingTime > 0)
+        if (Input.GetButton("Ability") && canFloat)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentFloatingTime -= Time.deltaTime;
@@ -55,6 +58,7 @@ public class ScriptFloating : MonoBehaviour {
             if (currentFloatingTime <= 0)
             {
                 coolDown = true;
+                canFloat = false;
             } 
         } else if (currentFloatingTime < FloatingTime)
         {
@@ -77,6 +81,7 @@ public class ScriptFloating : MonoBehaviour {
             if (currentFloatingTime >= FloatingTime)
             {
                 coolDown = false;
+                canFloat = true;
             }
         }
 
