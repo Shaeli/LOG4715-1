@@ -33,7 +33,7 @@ public class Shield : MonoBehaviour {
       activeShield--;
     }
     if (hasShield == true) {
-      if (Input.GetButtonDown("shield") && activeShield == 0) {
+      if (Input.GetButtonDown("Ability") && activeShield == 0) {
         shield.SetActive(true);
         shieldIsUp = true;
         activeShield = timeShield;

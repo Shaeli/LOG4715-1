@@ -42,7 +42,7 @@ public class ScriptFloating : MonoBehaviour {
 
     void Float()
     {
-        if (Input.GetButton("Float") && currentFloatingTime > 0)
+        if (Input.GetButton("Ability") && currentFloatingTime > 0)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentFloatingTime -= Time.deltaTime;
