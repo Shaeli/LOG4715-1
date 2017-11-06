@@ -11,6 +11,7 @@ public class WallGlueScript : MonoBehaviour {
     [SerializeField] float jumpForce=4;
 
     Transform wallCheck;
+    PlayerControler pControler;
     float wallRadius = .2f;
     bool sided;
     bool stuck;
@@ -21,6 +22,7 @@ public class WallGlueScript : MonoBehaviour {
     void Start () {
 
         wallCheck = transform.Find("WallCheck");
+        pControler = gameObject.GetComponent<PlayerControler>();
         coolDown = false;
         sided = false;
         stuck = false;
@@ -32,6 +34,7 @@ public class WallGlueScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        Debug.Log("Floor est : " + pControler._Floor);
         CheckSautMural();
         CheckSided();
         GlueCoolDown();
@@ -44,29 +47,30 @@ public class WallGlueScript : MonoBehaviour {
     {
         if (wallJump)
         {
-            if (gameObject.GetComponent<PlayerControler>()._Flipped)
+            if (pControler._Flipped)
             {
 
                 GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                 GetComponent<Rigidbody>().AddForce((new Vector3(0f, 2f, 2f) * jumpForce) / 1.5f);
-                gameObject.GetComponent<PlayerControler>().FlipCharacter(1);
+                pControler.FlipCharacter(1);
 
             }
-            else if (!gameObject.GetComponent<PlayerControler>()._Flipped)
+            else if (!pControler._Flipped)
             {
 
                 GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                 GetComponent<Rigidbody>().AddForce((new Vector3(0f, 2f, -2f) * jumpForce) / 1.5f);
-                gameObject.GetComponent<PlayerControler>().FlipCharacter(-1);
+                pControler.FlipCharacter(-1);
             }
             wallJump = false;
             stuck = false;
-            gameObject.GetComponent<PlayerControler>().decompte = 15;
+            pControler.decompte = 15;
         }
     }
     public void CheckSided()
     {
         Collider[] hitColliders = Physics.OverlapSphere(wallCheck.position, wallRadius, whatIsWall);
+        // Si le collider du personnage intersecte la position du mur sans que le personnage soit au sol
         if (hitColliders.Length != 0)
         {
             sided = true;
@@ -93,7 +97,7 @@ public class WallGlueScript : MonoBehaviour {
 
     public void CheckWallGlue()
     {
-        if(sided && !coolDown)
+        if(sided && !coolDown && !pControler._Floor)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentGlueTime -= Time.deltaTime;
@@ -113,6 +117,7 @@ public class WallGlueScript : MonoBehaviour {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
+
     public void CheckJump()
     {
         if (stuck && Input.GetButton("Jump"))
