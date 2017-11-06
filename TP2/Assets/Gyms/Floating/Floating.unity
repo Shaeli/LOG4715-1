@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FloatingTime: 3
-  RefillSpeed: 1
+  RefillSpeed: 0.25
   FloatingImagefill: {fileID: 892506896}
 --- !u!54 &1364157984
 Rigidbody:

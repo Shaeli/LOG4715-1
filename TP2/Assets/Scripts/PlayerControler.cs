@@ -132,11 +132,26 @@ public class PlayerControler : MonoBehaviour
         else
             _Floor = false;
 
+        // Ajouter le Character au plateforme mouvante
+        if (coll.gameObject.layer == LayerMask.NameToLayer("MovingPlatform"))
+        {
+            transform.parent.parent = coll.transform;
+        }
+
         // Évite une collision avec le plafond
         if (coll.relativeVelocity.y > 0)
         {
             _Grounded = true;
             _Anim.SetBool("Grounded", _Grounded);
+        }
+    }
+    
+    void OnCollisionExit(Collision coll)
+    {
+        if (coll.gameObject.layer == LayerMask.NameToLayer("MovingPlatform"))
+        {
+            transform.parent.parent = null;
+
         }
     }
 }
