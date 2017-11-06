@@ -38,39 +38,24 @@ public class ScriptTeleportation : MonoBehaviour
     {
         TeleportationCoolDown();
         CheckTeleportation();
-
     }
 
     void CheckTeleportation()
     {
       if (!coolDown)
       {
-        if (Input.GetButtonDown("Ability"))
-        {
-          buttonDown = true;
-        }
-        if (Input.GetButtonUp("Ability"))
-        {
-          if (gameObject.GetComponent<PlayerControler>()._Flipped)
-          {
-            transform.position += new Vector3(0, 0, -TeleportationDistance);
-            FloatingImagefill.GetComponent<Image>().fillAmount = 0;
-            coolDown = true;
-            TPGhost.SetActive(false);
-            buttonDown = false;
-            rotateOnce = false;
-          }
-          else
-          {
-            transform.position += new Vector3(0, 0, TeleportationDistance);
-            FloatingImagefill.GetComponent<Image>().fillAmount = 0;
-            coolDown = true;
-            TPGhost.SetActive(false);
-            buttonDown = false;
-            rotateOnce = false;
-          }
-        }
-        DisplayTpGhost(buttonDown);
+            DisplayTpGhost();
+
+            if (Input.GetButtonUp("Ability"))
+            {
+                transform.position += new Vector3(0, 0, transform.forward.z * TeleportationDistance);
+                FloatingImagefill.GetComponent<Image>().fillAmount = 0;
+                coolDown = true;
+                TPGhost.SetActive(false);
+                buttonDown = false;
+                rotateOnce = false;
+            }
+
       }
     }
 
@@ -88,30 +73,13 @@ public class ScriptTeleportation : MonoBehaviour
         }
     }
 
-    void DisplayTpGhost(bool buttonDown)
+    void DisplayTpGhost()
     {
-      if (buttonDown)
-      {
-        if (gameObject.GetComponent<PlayerControler>()._Flipped)
+        if (Input.GetButton("Ability"))
         {
-          if (!rotateOnce)
-          {
-            TPGhost.transform.Rotate(new Vector3(0, 180, 0));
-            rotateOnce = true;
-          }
-          TPGhost.transform.position = transform.position + new Vector3(0, 0, -TeleportationDistance);
-          TPGhost.SetActive(true);
+            TPGhost.transform.position = transform.position + new Vector3(0, 0, transform.forward.z * TeleportationDistance);
+            TPGhost.SetActive(true);
         }
-        else
-        {
-          if (rotateOnce)
-          {
-            TPGhost.transform.Rotate(new Vector3(0, 180, 0));
-            rotateOnce = false;
-          }
-          TPGhost.transform.position = transform.position + new Vector3(0, 0, TeleportationDistance);
-          TPGhost.SetActive(true);
-        }
-      }
+
     }
 }
