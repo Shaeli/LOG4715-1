@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Shield : MonoBehaviour {
 
+    [SerializeField]
+    Image ShieldBar;
+
   public int timeShield = 100;
 
   private int activeShield;
@@ -25,24 +28,28 @@ public class Shield : MonoBehaviour {
   }
 
   void Update() {
-    if (activeShield == 0) {
-      shield.SetActive(false);
-      shieldIsUp = false;
-    }
-    if (activeShield != 0) {
-      activeShield--;
-    }
-    if (hasShield == true) {
-      if (Input.GetButtonDown("Ability") && activeShield == 0) {
-        shield.SetActive(true);
-        shieldIsUp = true;
-        activeShield = timeShield;
-      }
+        if (activeShield == 0) {
+            shield.SetActive(false);
+            shieldIsUp = false;
+        }
+        if (activeShield != 0) {
+            activeShield--;
+        }
+        if (hasShield == true) {
+            if (Input.GetButtonDown("Ability") && activeShield == 0) {
+            shield.SetActive(true);
+            shieldIsUp = true;
+            activeShield = timeShield;
+            }
 
-    }
-    if (activeShield == 1) {
-      hasShield = false;
-    }
+        }
+        if (activeShield == 1) {
+            hasShield = false;
+        }
+        if (ShieldBar != null)
+        {
+            ShieldBar.fillAmount = (float)activeShield / timeShield;
+        }
   }
 
   private void OnTriggerEnter(Collider other)
