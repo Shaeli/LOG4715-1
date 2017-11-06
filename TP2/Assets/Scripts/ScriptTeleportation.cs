@@ -45,11 +45,11 @@ public class ScriptTeleportation : MonoBehaviour
     {
       if (!coolDown)
       {
-        if (Input.GetButtonDown("Teleportation"))
+        if (Input.GetButtonDown("Ability"))
         {
           buttonDown = true;
         }
-        if (Input.GetButtonUp("Teleportation"))
+        if (Input.GetButtonUp("Ability"))
         {
           if (gameObject.GetComponent<PlayerControler>()._Flipped)
           {

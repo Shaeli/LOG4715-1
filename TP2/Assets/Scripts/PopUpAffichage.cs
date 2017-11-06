@@ -41,7 +41,13 @@ public class PopUpAffichage : MonoBehaviour {
 
     void CheckPopUp()
     {
-        if(Input.GetButtonDown("FlecheHaut") && CoolDownAffichagetmp==0)
+        float dh = Input.GetAxis("DHorizontal");
+        float dv = Input.GetAxis("DVertical");
+
+        Debug.Log("dh: " + dh);
+        Debug.Log("dv: " + dv);
+
+        if(dv > 0 && CoolDownAffichagetmp==0)
         {
          
                images[0].SetActive(true);
@@ -50,19 +56,19 @@ public class PopUpAffichage : MonoBehaviour {
             
             
         }
-        if(Input.GetButtonDown("FlecheBas") && CoolDownAffichagetmp == 0)
+        else if(dv < 0 && CoolDownAffichagetmp == 0)
         {
                 images[1].SetActive(true);
                 CoolDownAffichagetmp = CoolDownAffichage;
 
         }
-        if (Input.GetButtonDown("Jumpopup") && CoolDownAffichagetmp == 0)
+        else if (dh > 0 && CoolDownAffichagetmp == 0)
         {
             images[2].SetActive(true);
             CoolDownAffichagetmp = CoolDownAffichage;
 
         }
-        if (Input.GetButtonDown("Merci") && CoolDownAffichagetmp == 0)
+        else if (dh < 0 && CoolDownAffichagetmp == 0)
         {
             images[3].SetActive(true);
             CoolDownAffichagetmp = CoolDownAffichage;
