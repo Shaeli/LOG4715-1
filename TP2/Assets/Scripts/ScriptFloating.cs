@@ -42,13 +42,14 @@ public class ScriptFloating : MonoBehaviour {
 
     void Float()
     {
-        if (Input.GetButton("Float") && !coolDown)
+        if (Input.GetButton("Float") && currentFloatingTime > 0)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentFloatingTime -= Time.deltaTime;
             FloatingImagefill.GetComponent<Image>().fillAmount = currentFloatingTime / FloatingTime;
             // Consider player as floor when he is floating
             gameObject.layer = LayerMask.NameToLayer("Floor");
+            coolDown = false;
 
             // Dseactiver la flottaison jusqu'a la fin du cooldown
             if (currentFloatingTime <= 0)
