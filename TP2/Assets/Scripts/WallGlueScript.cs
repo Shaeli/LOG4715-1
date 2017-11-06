@@ -93,7 +93,7 @@ public class WallGlueScript : MonoBehaviour {
 
     public void CheckWallGlue()
     {
-        if(Input.GetButton("Glue") && sided && !coolDown)
+        if(sided && !coolDown)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentGlueTime -= Time.deltaTime;
