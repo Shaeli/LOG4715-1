@@ -18,6 +18,7 @@ public class PlayerHP : MonoBehaviour {
         set
         {
             currentHP = value;
+            currentHP = Mathf.Max(currentHP, 0);
             HealthBar.color = healthColors[currentHP];
         }
     }

@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerHPShield : MonoBehaviour {
 
-    [SerializeField]
     int StartingHP = 3;
 
-    [SerializeField]
+    [SerializeField][Range(0,1)]
     float HealthBarAnimationRate = 0.5f;
 
     public Image HealthBar;
@@ -19,6 +18,7 @@ public class PlayerHPShield : MonoBehaviour {
         set
         {
             currentHP = value;
+            currentHP = Mathf.Max(CurrentHP, 0);
             HealthBar.color = healthColors[currentHP];
         }
     }
