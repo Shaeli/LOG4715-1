@@ -11,7 +11,7 @@ public class PlayerControler : MonoBehaviour
 
     // Déclaration des variables
     bool _Grounded { get; set; }
-    bool _Floor { get; set; }
+    public bool _Floor { get; set; }
     bool _Player { get; set; }
     public bool _Flipped { get; set; }
     Animator _Anim { get; set; }
@@ -124,13 +124,6 @@ public class PlayerControler : MonoBehaviour
         // On verifie si le joueur est en contact avec un autre joueur ou pas (pour saut empile)
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
             _Player = true;
-        else
-            _Player = false;
-
-        if (coll.gameObject.layer == LayerMask.NameToLayer("Floor"))
-            _Floor = true;
-        else
-            _Floor = false;
 
         // Ajouter le Character au plateforme mouvante
         if (coll.gameObject.layer == LayerMask.NameToLayer("MovingPlatform"))
@@ -145,13 +138,24 @@ public class PlayerControler : MonoBehaviour
             _Anim.SetBool("Grounded", _Grounded);
         }
     }
-    
+
+    private void OnCollisionStay(Collision coll)
+    {
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Floor"))
+            _Floor = true;
+    }
+
     void OnCollisionExit(Collision coll)
     {
         if (coll.gameObject.layer == LayerMask.NameToLayer("MovingPlatform"))
         {
             transform.parent.parent = null;
-
         }
+
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
+            _Player = false;
+
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Floor"))
+            _Floor = false;
     }
 }
