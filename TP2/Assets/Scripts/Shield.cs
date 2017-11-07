@@ -15,8 +15,6 @@ public class Shield : MonoBehaviour {
 
   private bool hasShield = false;
 
-  private bool deleteShield = false;
-
   public bool shieldIsUp {get ; set;}
 
   public GameObject shield;
