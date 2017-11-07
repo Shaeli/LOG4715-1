@@ -29,6 +29,6 @@ public class DebugHPScriptShield : MonoBehaviour {
 
     void ReloadLevel()
     {
-        SceneManager.LoadScene("Shield");
+        SceneManager.LoadScene("Gym_Shield");
     }
 }

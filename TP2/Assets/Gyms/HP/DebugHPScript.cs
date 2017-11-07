@@ -30,6 +30,6 @@ public class DebugHPScript : MonoBehaviour {
 
     void ReloadLevel()
     {
-        SceneManager.LoadScene("HP");
+        SceneManager.LoadScene("Gym_HP");
     }
 }

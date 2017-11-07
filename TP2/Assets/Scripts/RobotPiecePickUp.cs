@@ -24,7 +24,7 @@ public class RobotPiecePickUp : MonoBehaviour {
         {
             Debug.Log("Level completed!");
             // TODO: Complete level and load next.
-            SceneManager.LoadScene("RobotPartPickUp");
+            SceneManager.LoadScene("Gym_RobotParts");
         }
     }
 }
