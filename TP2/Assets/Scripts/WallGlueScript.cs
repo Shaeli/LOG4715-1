@@ -33,7 +33,6 @@ public class WallGlueScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         CheckSautMural();
         CheckSided();
         GlueCoolDown();
@@ -66,6 +65,7 @@ public class WallGlueScript : MonoBehaviour {
             pControler.decompte = 15;
         }
     }
+
     public void CheckSided()
     {
         Collider[] hitColliders = Physics.OverlapSphere(wallCheck.position, wallRadius, whatIsWall);

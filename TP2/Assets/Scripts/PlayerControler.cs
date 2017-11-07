@@ -10,7 +10,7 @@ public class PlayerControler : MonoBehaviour
     private static readonly Vector3 InverseCameraPosition = new Vector3(-10, 1, 0);
 
     // Déclaration des variables
-    bool _Grounded { get; set; }
+    public bool _Grounded { get; set; }
     public bool _Floor { get; set; }
     bool _Player { get; set; }
     public bool _Flipped { get; set; }
