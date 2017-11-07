@@ -19,6 +19,7 @@ public class PlayerHP : MonoBehaviour {
         {
             currentHP = value;
             currentHP = Mathf.Max(currentHP, 0);
+            currentHP = Mathf.Min(currentHP, StartingHP);
             HealthBar.color = healthColors[currentHP];
         }
     }
@@ -40,7 +41,7 @@ public class PlayerHP : MonoBehaviour {
     void Update()
     {
         // Update HealthBar UI.
-        if (HealthBar.fillAmount > ((float) CurrentHP / StartingHP)) {
+        if (HealthBar.fillAmount != ((float) CurrentHP / StartingHP)) {
             HealthBar.fillAmount = Mathf.Lerp(HealthBar.fillAmount, (float)CurrentHP / StartingHP, HealthBarAnimationRate);
         }
 
@@ -83,7 +84,7 @@ public class PlayerHP : MonoBehaviour {
     /// <param name="damagingObject"></param>
     private void GetDamaged(DamagingObject damagingObject)
     {
-        Debug.Log("Getting damaged!");
+        Debug.Log("Contact with health modifier: " + ((damagingObject.Damage > 0) ? "" : "+") + (-damagingObject.Damage) );
         CurrentHP -= damagingObject.Damage;
         wasDamaged = null;
     }

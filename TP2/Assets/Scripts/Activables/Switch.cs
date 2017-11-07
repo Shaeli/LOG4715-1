@@ -13,7 +13,7 @@ public class Switch : MonoBehaviour {
     [SerializeField]
     Animator SwitchAnimator;
 
-    public Activable ActivableObject;
+    public Activable[] ActivableObjects;
 
     private bool state;
     private bool isUsed;
@@ -32,6 +32,10 @@ public class Switch : MonoBehaviour {
         isUsed = true;
         state = !state;
         SwitchAnimator.SetBool("State", state);
-        ActivableObject?.Activate();
+        foreach (Activable activable in ActivableObjects)
+        {
+            activable.Activate();
+        }
+        
     }
 }

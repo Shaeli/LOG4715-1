@@ -18,7 +18,8 @@ public class PlayerHPShield : MonoBehaviour {
         set
         {
             currentHP = value;
-            currentHP = Mathf.Max(CurrentHP, 0);
+            currentHP = Mathf.Max(currentHP, 0);
+            currentHP = Mathf.Min(currentHP, StartingHP);
             HealthBar.color = healthColors[currentHP];
         }
     }
@@ -40,7 +41,7 @@ public class PlayerHPShield : MonoBehaviour {
     void Update()
     {
         // Update HealthBar UI.
-        if (HealthBar.fillAmount > ((float) CurrentHP / StartingHP)) {
+        if (HealthBar.fillAmount != ((float) CurrentHP / StartingHP)) {
             HealthBar.fillAmount = Mathf.Lerp(HealthBar.fillAmount, (float)CurrentHP / StartingHP, HealthBarAnimationRate);
         }
 
