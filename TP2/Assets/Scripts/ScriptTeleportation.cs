@@ -16,10 +16,6 @@ public class ScriptTeleportation : MonoBehaviour
 
     bool coolDown;
 
-    bool buttonDown = false;
-
-    bool rotateOnce = false;
-
     //Distance téléportation
     [SerializeField] float TeleportationDistance = 5f;
 
@@ -52,8 +48,6 @@ public class ScriptTeleportation : MonoBehaviour
                 FloatingImagefill.GetComponent<Image>().fillAmount = 0;
                 coolDown = true;
                 TPGhost.SetActive(false);
-                buttonDown = false;
-                rotateOnce = false;
             }
 
       }

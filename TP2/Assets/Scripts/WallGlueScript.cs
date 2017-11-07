@@ -43,7 +43,7 @@ public class WallGlueScript : MonoBehaviour {
 
     public void CheckSautMural()
     {
-        if (wallJump)
+        if (wallJump && !GetComponent<PlayerControler>()._Grounded)
         {
             if (pControler._Flipped)
             {
@@ -119,7 +119,7 @@ public class WallGlueScript : MonoBehaviour {
 
     public void CheckJump()
     {
-        if (stuck && Input.GetButton("Jump"))
+        if (stuck && Input.GetButtonDown("Jump"))
         {
             wallJump = true;
         }
