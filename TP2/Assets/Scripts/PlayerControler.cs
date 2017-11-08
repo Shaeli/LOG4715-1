@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControler : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerControler : MonoBehaviour
     Rigidbody _Rb { get; set; }
     Camera _MainCamera { get; set; }
     public int decompte { get; set; }
+	
+	private bool reloadOnce = false;
 
     // Valeurs exposées
     [SerializeField]
@@ -31,6 +34,9 @@ public class PlayerControler : MonoBehaviour
 
     [SerializeField]
     float PiledJumpMultiplier = 1.5f;
+	
+	[SerializeField]
+    float LowerBound = -50f;
 
     // Awake se produit avait le Start. Il peut être bien de régler les références dans cette section.
     void Awake()
@@ -66,6 +72,11 @@ public class PlayerControler : MonoBehaviour
         }
       
         CheckJump();
+		
+		if( !reloadOnce && transform.position.y < LowerBound) {
+			reloadOnce = true;
+			ReloadLevel();
+		}
     }
 
     // Gère le mouvement horizontal
@@ -157,5 +168,11 @@ public class PlayerControler : MonoBehaviour
 
         if (coll.gameObject.layer == LayerMask.NameToLayer("Floor"))
             _Floor = false;
+    }
+	
+	void ReloadLevel()
+    {
+        Scene loadedLevel = SceneManager.GetActiveScene ();
+		SceneManager.LoadScene (loadedLevel.buildIndex);
     }
 }
