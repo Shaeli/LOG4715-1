@@ -3,6 +3,7 @@ TP[0-9]/[Tt]emp/
 TP[0-9]/[Oo]bj/
 TP[0-9]/[Bb]uild/
 TP[0-9]/[Bb]uilds/
+TP[0-9]/.vs/
 TP[0-9]/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory

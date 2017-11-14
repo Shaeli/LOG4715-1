@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Diamonds
+  - Wall
+  - Shield
+  - Vis
+  - VisOr
+  - TpDroite
+  - TpGauche
+  - RobotPart
   layers:
   - Default
   - TransparentFX
@@ -13,10 +21,10 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
-  - 
-  - 
-  - 
+  - Floor
+  - Player
+  - Wall
+  - MovingPlatform
   - 
   - 
   - 
