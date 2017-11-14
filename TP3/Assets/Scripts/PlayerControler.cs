@@ -7,8 +7,8 @@ public class PlayerControler : MonoBehaviour
 {
     // Déclaration des constantes
     private static readonly Vector3 FlipRotation = new Vector3(0, 180, 0);
-    private static readonly Vector3 CameraPosition = new Vector3(10, 1, 0);
-    private static readonly Vector3 InverseCameraPosition = new Vector3(-10, 1, 0);
+    private static readonly Vector3 CameraPosition = new Vector3(10, 2, 0);
+    private static readonly Vector3 InverseCameraPosition = new Vector3(-10, 2, 0);
 
     // Déclaration des variables
     public bool _Grounded { get; set; }
@@ -113,14 +113,20 @@ public class PlayerControler : MonoBehaviour
         {
             _Flipped = true;
             transform.Rotate(FlipRotation);
-            _MainCamera.transform.Rotate(-FlipRotation);
+            //_MainCamera.transform.Rotate(-FlipRotation);
+            var angles = _MainCamera.transform.eulerAngles;
+            angles.y = -angles.y;
+            _MainCamera.transform.eulerAngles = angles;
             _MainCamera.transform.localPosition = InverseCameraPosition;
         }
         else if (horizontal > 0 && _Flipped)
         {
             _Flipped = false;
             transform.Rotate(-FlipRotation);
-            _MainCamera.transform.Rotate(FlipRotation);
+            //_MainCamera.transform.Rotate(FlipRotation);
+            var angles = _MainCamera.transform.eulerAngles;
+            angles.y = -angles.y;
+            _MainCamera.transform.eulerAngles = angles;
             _MainCamera.transform.localPosition = CameraPosition;
         }
     }
