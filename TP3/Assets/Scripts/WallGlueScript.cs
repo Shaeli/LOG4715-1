@@ -43,8 +43,11 @@ public class WallGlueScript : MonoBehaviour {
 
     public void CheckSautMural()
     {
+     
         if (wallJump && !GetComponent<PlayerControler>()._Grounded)
         {
+
+            pControler.decompte = 15;
             if (pControler._Flipped)
             {
 
@@ -62,7 +65,7 @@ public class WallGlueScript : MonoBehaviour {
             }
             wallJump = false;
             stuck = false;
-            pControler.decompte = 15;
+            
         }
     }
 
