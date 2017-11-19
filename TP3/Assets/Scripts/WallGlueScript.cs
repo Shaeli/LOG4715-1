@@ -30,7 +30,7 @@ public class WallGlueScript : MonoBehaviour {
         currentGlueTime = GlueTime;
         GlueImageFill.fillAmount = 1;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
         CheckSautMural();
@@ -38,16 +38,16 @@ public class WallGlueScript : MonoBehaviour {
         GlueCoolDown();
         CheckJump();
         CheckWallGlue();
-        
+
     }
 
     public void CheckSautMural()
     {
-     
+
         if (wallJump && !GetComponent<PlayerControler>()._Grounded)
         {
 
-            pControler.decompte = 15;
+            pControler.decompte = 10;
             if (pControler._Flipped)
             {
 
@@ -65,7 +65,7 @@ public class WallGlueScript : MonoBehaviour {
             }
             wallJump = false;
             stuck = false;
-            
+
         }
     }
 
