@@ -12,6 +12,10 @@ public class PlayerHPShield : MonoBehaviour {
 
     public Image HealthBar;
 
+    public float DamageCooldown = 1f;
+    public float FlashingRate = 0.5f;
+    public GameObject ModelRoot;
+
     public int CurrentHP
     {
         get { return currentHP; }
@@ -31,6 +35,8 @@ public class PlayerHPShield : MonoBehaviour {
     private int currentHP;
     private static Color[] healthColors = { Color.gray, Color.red, Color.yellow, Color.green };
     private DamagingObject wasDamaged = null;
+    private bool canBeDamaged = true;
+    private float flashingTimer = 0f;
 
     // Use this for initialization
     void Start () {
@@ -50,6 +56,25 @@ public class PlayerHPShield : MonoBehaviour {
         {
             GetDamaged(wasDamaged);
         }
+
+        if (!canBeDamaged)
+        {
+            flashingTimer += Time.deltaTime;
+            if (ModelRoot.activeSelf && flashingTimer > FlashingRate)
+            {
+                ModelRoot.SetActive(false);
+                flashingTimer = 0f;
+            }
+            else if(!ModelRoot.activeSelf && flashingTimer > FlashingRate)
+            {
+                ModelRoot.SetActive(true);
+                flashingTimer = 0f;
+            }
+        }
+        else if (!ModelRoot.activeSelf)
+        {
+            ModelRoot.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -59,7 +84,7 @@ public class PlayerHPShield : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         DamagingObject damagingObject = collision.gameObject.GetComponent<DamagingObject>();
-        if (damagingObject != null && !gameObject.GetComponent<Shield>().shieldIsUp)
+        if (damagingObject != null && (gameObject.GetComponent<Shield>() == null || !gameObject.GetComponent<Shield>().shieldIsUp) && canBeDamaged)
         {
             wasDamaged = damagingObject;
         }
@@ -72,7 +97,7 @@ public class PlayerHPShield : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         DamagingObject damagingObject = other.gameObject.GetComponent<DamagingObject>();
-        if (damagingObject != null && !gameObject.GetComponent<Shield>().shieldIsUp)
+        if (damagingObject != null && (gameObject.GetComponent<Shield>() == null || !gameObject.GetComponent<Shield>().shieldIsUp) && canBeDamaged)
         {
             wasDamaged = damagingObject;
         }
@@ -84,8 +109,14 @@ public class PlayerHPShield : MonoBehaviour {
     /// <param name="damagingObject"></param>
     private void GetDamaged(DamagingObject damagingObject)
     {
-        Debug.Log("Getting damaged!");
         CurrentHP -= damagingObject.Damage;
         wasDamaged = null;
+        canBeDamaged = false;
+        Invoke("EnableCanBeDamaged", DamageCooldown);
+    }
+
+    private void EnableCanBeDamaged()
+    {
+        canBeDamaged = true;
     }
 }

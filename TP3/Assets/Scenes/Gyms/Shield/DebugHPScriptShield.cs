@@ -9,9 +9,10 @@ public class DebugHPScriptShield : MonoBehaviour {
 
     private bool isDead = false;
 
+    public string SceneToLoad = "Gym_Shield";
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 
         PlayerHPShield o = gameObject.GetComponent<PlayerHPShield>();
         if (o != null && o.CurrentHP <= 0 && !isDead)
@@ -29,6 +30,6 @@ public class DebugHPScriptShield : MonoBehaviour {
 
     void ReloadLevel()
     {
-        SceneManager.LoadScene("Gym_Shield");
+        SceneManager.LoadScene(SceneToLoad);
     }
 }
