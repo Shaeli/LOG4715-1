@@ -41,7 +41,7 @@ public class WalkingDrone : MonoBehaviour {
         }
 	}
 
-    void OnCollisionEnter(Collision coll)
+    void OnTriggerEnter(Collider coll)
     {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -49,7 +49,7 @@ public class WalkingDrone : MonoBehaviour {
         }
     }
 
-    void OnCollisionStay(Collision coll)
+    void OnTriggerStay(Collider coll)
     {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -57,7 +57,7 @@ public class WalkingDrone : MonoBehaviour {
         }
     }
 
-    void OnCollisionExit(Collision coll)
+    void OnTriggerExit(Collider coll)
     {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -68,7 +68,6 @@ public class WalkingDrone : MonoBehaviour {
 
     void Walk()
     {
-        anim.SetBool("isAttacking", false);
         anim.SetBool("isWalking", true);
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) // Only move after the attack animation has finished playing
         {
@@ -83,7 +82,6 @@ public class WalkingDrone : MonoBehaviour {
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Walking")) // Stop moving when the walking animation has finished playing
         { 
             rb.velocity = new Vector3(0, 0, 0); // Stop moving 
-
         }
     }
 
