@@ -6,7 +6,6 @@ public class WalkingDrone : MonoBehaviour {
 
     [SerializeField] private Transform player;
     [SerializeField] private float speed = 1f;
-    [SerializeField] private float attackRange = 0.5f;
     private static Animator anim;
     private static Rigidbody rb;
     private static readonly Vector3 FlipRotation = new Vector3(0, 180, 0);
@@ -27,12 +26,7 @@ public class WalkingDrone : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Vector3.Distance(player.position, transform.position) < attackRange)
-        {
-            FlipBeforeAttack();
-            Attack();
-        }
-        else
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             if (transform.parent.GetComponent<EnemyPlatform>().playerArrived)
             {
@@ -46,6 +40,31 @@ public class WalkingDrone : MonoBehaviour {
             Walk();
         }
 	}
+
+    void OnCollisionEnter(Collision coll)
+    {
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Attack();
+        }
+    }
+
+    void OnCollisionStay(Collision coll)
+    {
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Attack();
+        }
+    }
+
+    void OnCollisionExit(Collision coll)
+    {
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            anim.SetBool("isAttacking", false);
+            anim.SetBool("isWalking", true);
+        }
+    }
 
     void Walk()
     {
@@ -64,7 +83,6 @@ public class WalkingDrone : MonoBehaviour {
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Walking")) // Stop moving when the walking animation has finished playing
         { 
             rb.velocity = new Vector3(0, 0, 0); // Stop moving 
-            // Shoot laser beam
 
         }
     }
