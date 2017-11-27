@@ -41,15 +41,17 @@ public class ScriptTeleportation : MonoBehaviour
       if (!coolDown)
       {
             DisplayTpGhost();
-
-            if (Input.GetButtonUp("Ability"))
+            if (!Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance ))
             {
-                transform.position += new Vector3(0, 0, transform.forward.z * TeleportationDistance);
-                FloatingImagefill.GetComponent<Image>().fillAmount = 0;
-                coolDown = true;
-                TPGhost.SetActive(false);
+                
+                if (Input.GetButtonUp("Ability"))
+                {
+                    transform.position += new Vector3(0, 0, transform.forward.z * TeleportationDistance);
+                    FloatingImagefill.GetComponent<Image>().fillAmount = 0;
+                    coolDown = true;
+                    TPGhost.SetActive(false);
+                }
             }
-
       }
     }
 
@@ -69,10 +71,14 @@ public class ScriptTeleportation : MonoBehaviour
 
     void DisplayTpGhost()
     {
-        if (Input.GetButton("Ability"))
+        if (Input.GetButton("Ability") && !Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance))
         {
             TPGhost.transform.position = transform.position + new Vector3(0, 0, transform.forward.z * TeleportationDistance);
             TPGhost.SetActive(true);
+        }
+        else
+        {
+            TPGhost.SetActive(false);
         }
 
     }
