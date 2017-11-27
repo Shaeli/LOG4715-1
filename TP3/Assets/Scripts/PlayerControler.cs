@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayerControler : MonoBehaviour
@@ -19,6 +20,7 @@ public class PlayerControler : MonoBehaviour
     Rigidbody _Rb { get; set; }
     Camera _MainCamera { get; set; }
     public int decompte { get; set; }
+    public GameObject FlipInvariantObjects;
 	
 	private bool reloadOnce = false;
 
@@ -124,6 +126,14 @@ public class PlayerControler : MonoBehaviour
                 _MainCamera.transform.eulerAngles = angles;
                 _MainCamera.transform.localPosition = InverseCameraPosition;
             }
+
+            if(FlipInvariantObjects != null)
+            {
+                //FlipInvariantObjects.GetComponent<RectTransform>().Rotate(FlipRotation);
+                var a = FlipInvariantObjects.GetComponent<RectTransform>().eulerAngles;
+                a.y = -a.y;
+                FlipInvariantObjects.GetComponent<RectTransform>().eulerAngles = a;
+            }
         }
         else if (horizontal > 0 && _Flipped)
         {
@@ -136,6 +146,13 @@ public class PlayerControler : MonoBehaviour
             {
                 _MainCamera.transform.eulerAngles = angles;
                 _MainCamera.transform.localPosition = CameraPosition;
+            }
+            if (FlipInvariantObjects != null)
+            {
+                //FlipInvariantObjects.GetComponent<RectTransform>().Rotate(-FlipRotation);
+                var a = FlipInvariantObjects.GetComponent<RectTransform>().eulerAngles;
+                a.y = -a.y;
+                FlipInvariantObjects.GetComponent<RectTransform>().eulerAngles = a;
             }
         }
     }
