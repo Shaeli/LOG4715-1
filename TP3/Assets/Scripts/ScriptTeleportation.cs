@@ -11,6 +11,8 @@ public class ScriptTeleportation : MonoBehaviour
     //cooldown en cours
     [SerializeField] float RefillSpeed = 1f;
     [SerializeField] Image FloatingImagefill;
+    [SerializeField] AudioClip TPSound;
+
 
     [SerializeField] GameObject TPGhost;
 
@@ -47,6 +49,7 @@ public class ScriptTeleportation : MonoBehaviour
                 if (Input.GetButtonUp("Ability"))
                 {
                     transform.position += new Vector3(0, 0, transform.forward.z * TeleportationDistance);
+                    AudioSource.PlayClipAtPoint(TPSound, transform.position);
                     FloatingImagefill.GetComponent<Image>().fillAmount = 0;
                     coolDown = true;
                     TPGhost.SetActive(false);

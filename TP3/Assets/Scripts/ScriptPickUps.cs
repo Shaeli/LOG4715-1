@@ -8,6 +8,12 @@ public class ScriptPickUps : MonoBehaviour
     [SerializeField]
     Text countText;
 
+    [SerializeField]
+    AudioClip impactpiece;
+
+    [SerializeField]
+    AudioClip impactrobotpart;
+
     private int score;
 
     // Utile pour régler des valeurs aux objets
@@ -20,18 +26,21 @@ public class ScriptPickUps : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Vis"))
         {
+            AudioSource.PlayClipAtPoint(impactpiece, transform.position);
             other.gameObject.SetActive(false);
             score++;
             SetCountText();
         }
         else if (other.gameObject.CompareTag("VisOr"))
         {
+            AudioSource.PlayClipAtPoint(impactpiece, transform.position);
             other.gameObject.SetActive(false);
-            score+=3;
+            score +=3;
             SetCountText();
         }
         else if (other.gameObject.CompareTag("RobotPart"))
         {
+            AudioSource.PlayClipAtPoint(impactrobotpart, transform.position);
             other.gameObject.SetActive(false);
             gameObject.SendMessage("RobotPiecePickedUp");
         }

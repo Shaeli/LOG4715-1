@@ -19555,6 +19555,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 0}
+  impactpiece: {fileID: 8300000, guid: dd916db273411c740b882f0dabf0e9a2, type: 3}
+  impactrobotpart: {fileID: 8300000, guid: f04879a855fdb8041a6b071a673eb593, type: 3}
 --- !u!114 &1746495405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19664,6 +19666,7 @@ MonoBehaviour:
   timecd: 3
   RefillSpeed: 0.3
   FloatingImagefill: {fileID: 983241156}
+  TPSound: {fileID: 8300000, guid: 5596fb3c2562d8347926e4ab3e9c2ab7, type: 3}
   TPGhost: {fileID: 391535}
   TeleportationDistance: 10
 --- !u!114 &1746495412
