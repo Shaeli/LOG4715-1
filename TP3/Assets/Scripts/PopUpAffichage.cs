@@ -44,8 +44,8 @@ public class PopUpAffichage : MonoBehaviour {
         float dh = Input.GetAxis("DHorizontal" + GetComponent<Multiplayer>().PlayerNumber);
         float dv = Input.GetAxis("DVertical" + GetComponent<Multiplayer>().PlayerNumber);
 
-        Debug.Log("dh: " + dh);
-        Debug.Log("dv: " + dv);
+        //Debug.Log("dh: " + dh);
+        //Debug.Log("dv: " + dv);
 
         if(dv > 0 && CoolDownAffichagetmp==0)
         {

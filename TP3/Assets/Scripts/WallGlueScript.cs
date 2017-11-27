@@ -7,7 +7,7 @@ public class WallGlueScript : MonoBehaviour {
     [SerializeField] LayerMask whatIsWall;
     [SerializeField] float GlueTime = 3.0f;
     [SerializeField] float RefillSpeed = 1f;
-    [SerializeField] Image GlueImageFill;
+    //[SerializeField] Image GlueImageFill;
     [SerializeField] float jumpForce=4;
 
     Transform wallCheck;
@@ -28,7 +28,7 @@ public class WallGlueScript : MonoBehaviour {
         stuck = false;
         wallJump = false;
         currentGlueTime = GlueTime;
-        GlueImageFill.fillAmount = 1;
+        //GlueImageFill.fillAmount = 1;
     }
 
 	// Update is called once per frame
@@ -88,7 +88,7 @@ public class WallGlueScript : MonoBehaviour {
         if (coolDown)
         {
             currentGlueTime += Time.deltaTime * RefillSpeed;
-            GlueImageFill.GetComponent<Image>().fillAmount = currentGlueTime / GlueTime;
+            //GlueImageFill.GetComponent<Image>().fillAmount = currentGlueTime / GlueTime;
 
             if (currentGlueTime >= GlueTime)
             {
@@ -103,7 +103,7 @@ public class WallGlueScript : MonoBehaviour {
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentGlueTime -= Time.deltaTime;
-            GlueImageFill.GetComponent<Image>().fillAmount = currentGlueTime / GlueTime;
+            //GlueImageFill.GetComponent<Image>().fillAmount = currentGlueTime / GlueTime;
             if (currentGlueTime <= 0)
             {
                 coolDown = true;
