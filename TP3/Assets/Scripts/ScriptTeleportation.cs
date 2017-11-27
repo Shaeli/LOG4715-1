@@ -17,6 +17,7 @@ public class ScriptTeleportation : MonoBehaviour
     [SerializeField] GameObject TPGhost;
 
     bool coolDown;
+    int playerNum = 0;
 
     //Distance téléportation
     [SerializeField] float TeleportationDistance = 5f;
@@ -29,6 +30,7 @@ public class ScriptTeleportation : MonoBehaviour
         TPGhost.SetActive(false);
         coolDown = false;
         FloatingImagefill.fillAmount = 1;
+        playerNum = GetComponent<Multiplayer>().PlayerNumber;
     }
 
     // Vérifie les entrées de commandes du joueur
@@ -46,7 +48,7 @@ public class ScriptTeleportation : MonoBehaviour
             if (!Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance ))
             {
                 
-                if (Input.GetButtonUp("Ability"))
+                if (Input.GetButtonUp("Ability" + playerNum))
                 {
                     transform.position += new Vector3(0, 0, transform.forward.z * TeleportationDistance);
                     AudioSource.PlayClipAtPoint(TPSound, transform.position);
@@ -74,7 +76,7 @@ public class ScriptTeleportation : MonoBehaviour
 
     void DisplayTpGhost()
     {
-        if (Input.GetButton("Ability") && !Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance))
+        if (Input.GetButton("Ability" + playerNum) && !Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance))
         {
             TPGhost.transform.position = transform.position + new Vector3(0, 0, transform.forward.z * TeleportationDistance);
             TPGhost.SetActive(true);
