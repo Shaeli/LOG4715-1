@@ -122,7 +122,7 @@ public class WallGlueScript : MonoBehaviour {
 
     public void CheckJump()
     {
-        if (stuck && Input.GetButtonDown("Jump"))
+        if (stuck && Input.GetButtonDown("Jump" + GetComponent<Multiplayer>().PlayerNumber))
         {
             wallJump = true;
         }

@@ -41,8 +41,8 @@ public class PopUpAffichage : MonoBehaviour {
 
     void CheckPopUp()
     {
-        float dh = Input.GetAxis("DHorizontal");
-        float dv = Input.GetAxis("DVertical");
+        float dh = Input.GetAxis("DHorizontal" + GetComponent<Multiplayer>().PlayerNumber);
+        float dv = Input.GetAxis("DVertical" + GetComponent<Multiplayer>().PlayerNumber);
 
         Debug.Log("dh: " + dh);
         Debug.Log("dv: " + dv);

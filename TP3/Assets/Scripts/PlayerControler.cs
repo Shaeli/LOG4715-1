@@ -22,6 +22,8 @@ public class PlayerControler : MonoBehaviour
 	
 	private bool reloadOnce = false;
 
+    private int playerNum;
+
     // Valeurs exposées
     [SerializeField]
     float MoveSpeed = 5.0f;
@@ -44,6 +46,7 @@ public class PlayerControler : MonoBehaviour
         _Anim = GetComponent<Animator>();
         _Rb = GetComponent<Rigidbody>();
         _MainCamera = Camera.main;
+        playerNum = GetComponent<Multiplayer>().PlayerNumber;
     }
 
     // Utile pour régler des valeurs aux objets
@@ -62,7 +65,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (decompte == 0)
         {
-            var horizontal = Input.GetAxis("Horizontal") * MoveSpeed;
+            var horizontal = Input.GetAxis("Horizontal" + playerNum) * MoveSpeed;
             HorizontalMove(horizontal);
             FlipCharacter(horizontal);
         }
@@ -91,7 +94,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (_Grounded)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump" + playerNum))
             {
                 // If piled jump, add a force
                 if (_Player && !_Floor)
@@ -116,8 +119,11 @@ public class PlayerControler : MonoBehaviour
             //_MainCamera.transform.Rotate(-FlipRotation);
             var angles = _MainCamera.transform.eulerAngles;
             angles.y = -angles.y;
-            _MainCamera.transform.eulerAngles = angles;
-            _MainCamera.transform.localPosition = InverseCameraPosition;
+            if (_MainCamera.gameObject.GetComponent<MultiplayerCamera>() == null)
+            {
+                _MainCamera.transform.eulerAngles = angles;
+                _MainCamera.transform.localPosition = InverseCameraPosition;
+            }
         }
         else if (horizontal > 0 && _Flipped)
         {
@@ -126,8 +132,11 @@ public class PlayerControler : MonoBehaviour
             //_MainCamera.transform.Rotate(FlipRotation);
             var angles = _MainCamera.transform.eulerAngles;
             angles.y = -angles.y;
-            _MainCamera.transform.eulerAngles = angles;
-            _MainCamera.transform.localPosition = CameraPosition;
+            if (_MainCamera.gameObject.GetComponent<MultiplayerCamera>() == null)
+            {
+                _MainCamera.transform.eulerAngles = angles;
+                _MainCamera.transform.localPosition = CameraPosition;
+            }
         }
     }
 

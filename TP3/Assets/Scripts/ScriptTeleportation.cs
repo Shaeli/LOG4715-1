@@ -12,9 +12,8 @@ public class ScriptTeleportation : MonoBehaviour
     [SerializeField] float RefillSpeed = 1f;
     [SerializeField] Image FloatingImagefill;
     [SerializeField] AudioClip TPSound;
-
-
     [SerializeField] GameObject TPGhost;
+    [SerializeField] GameObject TPGhostR;
 
     bool coolDown;
     int playerNum = 0;
@@ -28,6 +27,7 @@ public class ScriptTeleportation : MonoBehaviour
     void Awake()
     {
         TPGhost.SetActive(false);
+        TPGhostR.SetActive(false);
         coolDown = false;
         FloatingImagefill.fillAmount = 1;
         playerNum = GetComponent<Multiplayer>().PlayerNumber;
@@ -55,9 +55,14 @@ public class ScriptTeleportation : MonoBehaviour
                     FloatingImagefill.GetComponent<Image>().fillAmount = 0;
                     coolDown = true;
                     TPGhost.SetActive(false);
+
                 }
             }
-      }
+            else if (Input.GetButtonUp("Ability" + playerNum))
+            {
+              TPGhostR.SetActive(false);
+            }
+        }
     }
 
     void TeleportationCoolDown()
@@ -80,10 +85,13 @@ public class ScriptTeleportation : MonoBehaviour
         {
             TPGhost.transform.position = transform.position + new Vector3(0, 0, transform.forward.z * TeleportationDistance);
             TPGhost.SetActive(true);
+            TPGhostR.SetActive(false);
         }
-        else
+        else if (Input.GetButton("Ability" + playerNum) && Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance))
         {
+            TPGhostR.transform.position = transform.position + new Vector3(0, 0, transform.forward.z * TeleportationDistance);
             TPGhost.SetActive(false);
+            TPGhostR.SetActive(true);
         }
 
     }
