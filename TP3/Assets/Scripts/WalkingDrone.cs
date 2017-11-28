@@ -6,6 +6,8 @@ public class WalkingDrone : MonoBehaviour {
 
     [SerializeField] private Transform player;
     [SerializeField] private float speed = 1f;
+    [SerializeField] private Transform leftExtremety;
+    [SerializeField] private Transform rightExtremety;
     private static Animator anim;
     private static Rigidbody rb;
     private static readonly Vector3 FlipRotation = new Vector3(0, 180, 0);
@@ -20,7 +22,6 @@ public class WalkingDrone : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         float platformLength = transform.parent.transform.localScale.z;
-        extremityPosition = platformLength / 2f * transform.localScale.z - transform.localScale.z / 2f;
 	}
 	
 	// Update is called once per frame
@@ -71,7 +72,13 @@ public class WalkingDrone : MonoBehaviour {
         anim.SetBool("isWalking", true);
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) // Only move after the attack animation has finished playing
         {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, speed * transform.forward.z);
+            float step = speed * Time.deltaTime;
+            if (transform.forward.z > 0)
+                transform.position = Vector3.MoveTowards(transform.position, rightExtremety.position, step);
+            else
+                transform.position = Vector3.MoveTowards(transform.position, leftExtremety.position, step);
+
+            //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, speed * transform.forward.z);
         }
     }
 
@@ -86,14 +93,16 @@ public class WalkingDrone : MonoBehaviour {
     }
 
     // Gère l'orientation du joueur et les ajustements de la camera
+    //         extremityPosition = platformLength / 2f * transform.localScale.z - transform.localScale.z / 2f;
+
     void FlipCharacter()
     {
-        if (transform.localPosition.z > extremityPosition && !flipped)
+        if (transform.localPosition.z > rightExtremety.localPosition.z - transform.localScale.z / 2f && !flipped)
         {
             flipped = true;
             transform.Rotate(FlipRotation);
         }
-        else if (transform.localPosition.z < -extremityPosition && flipped) 
+        else if (transform.localPosition.z < leftExtremety.localPosition.z + transform.localScale.z / 2f && flipped) 
         {
             flipped = false;
             transform.Rotate(-FlipRotation);

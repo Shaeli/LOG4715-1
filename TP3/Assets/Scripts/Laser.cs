@@ -22,7 +22,7 @@ public class Laser : MonoBehaviour {
         lr = GetComponent<LineRenderer>();
         ps = GetComponent<ParticleSystem>();
         lr.startWidth = 0.2f;
-        lr.endWidth = 0.05f;
+        lr.endWidth = 0.3f;
 	}
 	
 	// Update is called once per frame
