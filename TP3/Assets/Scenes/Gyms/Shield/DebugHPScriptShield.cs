@@ -25,6 +25,11 @@ public class DebugHPScriptShield : MonoBehaviour {
 
     void GameOver()
     {
+        Decompose d = GetComponent<Decompose>();
+        if (d != null)
+        {
+            d.DecomposeMe();
+        }
         Invoke("ReloadLevel", ReloadDelay);
     }
 
