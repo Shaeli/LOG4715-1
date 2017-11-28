@@ -57,7 +57,7 @@ public class PlayerHPShield : MonoBehaviour {
             GetDamaged(wasDamaged);
         }
 
-        if (!canBeDamaged)
+        if (!canBeDamaged && CurrentHP > 0)
         {
             flashingTimer += Time.deltaTime;
             if (ModelRoot.activeSelf && flashingTimer > FlashingRate)
@@ -71,7 +71,7 @@ public class PlayerHPShield : MonoBehaviour {
                 flashingTimer = 0f;
             }
         }
-        else if (!ModelRoot.activeSelf)
+        else if (CurrentHP > 0 && !ModelRoot.activeSelf)
         {
             ModelRoot.SetActive(true);
         }
