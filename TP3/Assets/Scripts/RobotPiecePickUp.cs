@@ -30,7 +30,7 @@ public class RobotPiecePickUp : MonoBehaviour {
             // TODO: Complete level and load next.
             if (GameStateText != null)
             {
-                GameStateText.text = "Level completed!";
+                GameStateText.text = "Level Completed!";
             }
             Invoke("LoadMenu", DelayLoad);
         }
