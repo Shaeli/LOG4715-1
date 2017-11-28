@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class RobotPiecePickUp : MonoBehaviour {
 
     [SerializeField]
     int TotalNbPieces = 5;
+    [SerializeField]
+    float DelayLoad = 3f;
+    [SerializeField]
+    Text GameStateText;
 
-
-    private int currentNbPieces;
+    static public int currentNbPieces;
     void Start()
     {
         currentNbPieces = 0;
@@ -19,12 +23,22 @@ public class RobotPiecePickUp : MonoBehaviour {
     {
         currentNbPieces++;
         Debug.Log("Number of robot pieces found (" + currentNbPieces + "/" + TotalNbPieces + ")");
-
-        if(currentNbPieces == TotalNbPieces)
+        ScoreTextManager.Instance.SetPartPickedNum(currentNbPieces);
+        if (currentNbPieces == TotalNbPieces)
         {
             Debug.Log("Level completed!");
             // TODO: Complete level and load next.
-            SceneManager.LoadScene("Gym_RobotParts");
+            if (GameStateText != null)
+            {
+                GameStateText.text = "Level Completed!";
+            }
+            Invoke("LoadMenu", DelayLoad);
         }
+    }
+
+    void LoadMenu()
+    {
+       
+        SceneManager.LoadScene("Menu");
     }
 }

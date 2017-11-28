@@ -48,6 +48,7 @@ public class ScriptPickUps : MonoBehaviour
 
     void SetCountText()
     {
+        ScoreTextManager.Instance.SetScore(score);
         if (countText != null)
         {
             countText.text = "Score : " + score.ToString();

@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class DebugHPScriptShield : MonoBehaviour {
 
     public int ReloadDelay = 3;
+    public Text GameStateText;
 
     private bool isDead = false;
+    
 
     public string SceneToLoad = "Gym_Shield";
 
@@ -25,6 +28,15 @@ public class DebugHPScriptShield : MonoBehaviour {
 
     void GameOver()
     {
+        if (GameStateText != null)
+        {
+            GameStateText.text = "Game Over!";
+        }
+        Decompose d = GetComponent<Decompose>();
+        if (d != null)
+        {
+            d.DecomposeMe();
+        }
         Invoke("ReloadLevel", ReloadDelay);
     }
 
