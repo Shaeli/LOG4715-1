@@ -21,8 +21,10 @@ public class PlayerControler : MonoBehaviour
     Camera _MainCamera { get; set; }
     public int decompte { get; set; }
     public GameObject FlipInvariantObjects;
-	
-	private bool reloadOnce = false;
+
+    public Text GameStateText;
+
+    private bool reloadOnce = false;
 
     private int playerNum;
 
@@ -80,7 +82,11 @@ public class PlayerControler : MonoBehaviour
 		
 		if( !reloadOnce && transform.position.y < LowerBound) {
 			reloadOnce = true;
-			ReloadLevel();
+            if (GameStateText != null)
+            {
+                GameStateText.text = "Game Over!";
+            }
+            Invoke("ReloadLevel", 3f);
 		}
     }
 
