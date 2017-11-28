@@ -9,7 +9,7 @@ public class RobotPiecePickUp : MonoBehaviour {
     int TotalNbPieces = 5;
 
 
-    private int currentNbPieces;
+    static public int currentNbPieces;
     void Start()
     {
         currentNbPieces = 0;
