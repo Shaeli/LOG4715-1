@@ -25,10 +25,10 @@ TagManager:
   - Player
   - Wall
   - MovingPlatform
-  - 
-  - 
-  - 
-  - 
+  - Collectables
+  - Leviers
+  - Ennemies
+  - Teleporter
   - 
   - 
   - 
