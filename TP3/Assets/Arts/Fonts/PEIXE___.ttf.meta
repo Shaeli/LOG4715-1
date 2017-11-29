@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: aa1fd576805a0754ebb192025c79554b
+timeCreated: 1511912445
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: PEIXE FRITO
+  fontNames:
+  - PEIXE FRITO
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
