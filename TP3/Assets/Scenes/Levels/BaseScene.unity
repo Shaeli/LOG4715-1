@@ -11137,6 +11137,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aaaa70226aad97641a95ef30dc1c44f1, type: 3}
   m_IsPrefabParent: 0
+--- !u!114 &1130199653 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114497611626359868, guid: 9e9830de5dbf91544884143e0cf785bf,
+    type: 2}
+  m_PrefabInternal: {fileID: 509250579}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1130243121
 Prefab:
   m_ObjectHideFlags: 0
@@ -19588,7 +19594,7 @@ Prefab:
         type: 2}
       propertyPath: FloatingImagefill
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1130199653}
     - target: {fileID: 114876106717106576, guid: a5128f70dd3516d4495bbed21f1f3eb7,
         type: 2}
       propertyPath: GameStateText
