@@ -8,7 +8,7 @@ public class WallGlueScript : MonoBehaviour {
     [SerializeField] float GlueTime = 3.0f;
     [SerializeField] float RefillSpeed = 1f;
     //[SerializeField] Image GlueImageFill;
-    [SerializeField] float jumpForce=4;
+    [SerializeField] float jumpForce;
 
     Transform wallCheck;
     PlayerControler pControler;
@@ -20,7 +20,7 @@ public class WallGlueScript : MonoBehaviour {
 
     bool coolDown;
     void Start () {
-
+        jumpForce = 200;
         wallCheck = transform.Find("WallCheck");
         pControler = gameObject.GetComponent<PlayerControler>();
         coolDown = false;
