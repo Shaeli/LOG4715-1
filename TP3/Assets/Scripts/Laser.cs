@@ -101,7 +101,7 @@ public class Laser : MonoBehaviour {
                 lr.SetPosition(1, hit.point);
 
                 // Check if it is player
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player") && hit.transform.gameObject.GetComponent<PlayerHPShield>().canBeDamaged)
                 {
                     DamagingObject damageObject = new DamagingObject();
                     damageObject.Damage = 1;

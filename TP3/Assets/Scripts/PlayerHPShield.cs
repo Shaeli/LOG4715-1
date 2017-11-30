@@ -15,6 +15,7 @@ public class PlayerHPShield : MonoBehaviour {
     public float DamageCooldown = 1f;
     public float FlashingRate = 0.5f;
     public GameObject ModelRoot;
+    public bool canBeDamaged { get; set; }
 
     public int CurrentHP
     {
@@ -35,13 +36,13 @@ public class PlayerHPShield : MonoBehaviour {
     private int currentHP;
     private static Color[] healthColors = { Color.gray, Color.red, Color.yellow, Color.green };
     private DamagingObject wasDamaged = null;
-    private bool canBeDamaged = true;
     private float flashingTimer = 0f;
 
     // Use this for initialization
     void Start () {
         CurrentHP = StartingHP;
         HealthBar.fillAmount = 1f;
+        canBeDamaged = true;
     }
 
     void Update()
