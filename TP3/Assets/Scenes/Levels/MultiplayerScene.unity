@@ -1952,7 +1952,6 @@ GameObject:
   - component: {fileID: 238427544}
   - component: {fileID: 238427543}
   - component: {fileID: 238427542}
-  - component: {fileID: 238427541}
   - component: {fileID: 238427540}
   - component: {fileID: 238427548}
   - component: {fileID: 238427547}
@@ -1965,6 +1964,7 @@ GameObject:
   - component: {fileID: 238427545}
   - component: {fileID: 238427546}
   - component: {fileID: 238427534}
+  - component: {fileID: 238427541}
   m_Layer: 9
   m_Name: MaleFree1
   m_TagString: Player
@@ -2045,6 +2045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalNbPieces: 5
+  Winsound: {fileID: 0}
   DelayLoad: 3
   GameStateText: {fileID: 1465834967}
 --- !u!114 &238427537
@@ -2095,6 +2096,7 @@ MonoBehaviour:
   FlipInvariantObjects: {fileID: 485953612}
   GameStateText: {fileID: 0}
   MoveSpeed: 5
+  LoseSound: {fileID: 0}
   JumpForce: 6
   WhatIsGround:
     serializedVersion: 2
@@ -2114,23 +2116,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBarAnimationRate: 0.5
+  Damage: {fileID: 0}
   HealthBar: {fileID: 2012549795}
   DamageCooldown: 2
   FlashingRate: 0.1
   ModelRoot: {fileID: 1606545952}
---- !u!65 &238427541
-BoxCollider:
+--- !u!136 &238427541
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65647481418432242, guid: a5128f70dd3516d4495bbed21f1f3eb7,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 238427531}
-  m_Material: {fileID: 13400000, guid: eb535d441884b784492d6b42c8ebcadf, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.3, z: 0.6}
-  m_Center: {x: 0, y: 0.18, z: 0}
+  m_Radius: 0.2
+  m_Height: 0.8
+  m_Direction: 0
+  m_Center: {x: 0, y: 0.21, z: 0}
 --- !u!65 &238427542
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2228,6 +2231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReloadDelay: 3
   GameStateText: {fileID: 1465834967}
+  LoseSound: {fileID: 0}
   SceneToLoad: MultiplayerScene
 --- !u!114 &238427548
 MonoBehaviour:
@@ -14380,7 +14384,6 @@ GameObject:
   - component: {fileID: 1627147521}
   - component: {fileID: 1627147520}
   - component: {fileID: 1627147519}
-  - component: {fileID: 1627147518}
   - component: {fileID: 1627147517}
   - component: {fileID: 1627147523}
   - component: {fileID: 1627147516}
@@ -14393,6 +14396,7 @@ GameObject:
   - component: {fileID: 1627147522}
   - component: {fileID: 1627147524}
   - component: {fileID: 1627147525}
+  - component: {fileID: 1627147518}
   m_Layer: 9
   m_Name: MaleFree1
   m_TagString: Player
@@ -14476,6 +14480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalNbPieces: 5
+  Winsound: {fileID: 0}
   DelayLoad: 3
   GameStateText: {fileID: 1465834967}
 --- !u!114 &1627147514
@@ -14526,6 +14531,7 @@ MonoBehaviour:
   FlipInvariantObjects: {fileID: 2068663434}
   GameStateText: {fileID: 0}
   MoveSpeed: 5
+  LoseSound: {fileID: 0}
   JumpForce: 6
   WhatIsGround:
     serializedVersion: 2
@@ -14545,23 +14551,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBarAnimationRate: 0.5
+  Damage: {fileID: 0}
   HealthBar: {fileID: 1379766355}
   DamageCooldown: 2
   FlashingRate: 0.1
   ModelRoot: {fileID: 1620386158}
---- !u!65 &1627147518
-BoxCollider:
+--- !u!136 &1627147518
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65647481418432242, guid: a5128f70dd3516d4495bbed21f1f3eb7,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1627147508}
-  m_Material: {fileID: 13400000, guid: eb535d441884b784492d6b42c8ebcadf, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.3, z: 0.6}
-  m_Center: {x: 0, y: 0.18, z: 0}
+  m_Radius: 0.2
+  m_Height: 0.8
+  m_Direction: 0
+  m_Center: {x: 0, y: 0.21, z: 0}
 --- !u!65 &1627147519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14635,6 +14642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReloadDelay: 3
   GameStateText: {fileID: 1465834967}
+  LoseSound: {fileID: 0}
   SceneToLoad: MultiplayerScene
 --- !u!114 &1627147524
 MonoBehaviour:
