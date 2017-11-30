@@ -19661,6 +19661,11 @@ Prefab:
       propertyPath: Damage
       value: 
       objectReference: {fileID: 8300000, guid: ac150ccf1d0dab4408c54e0476fdf2b1, type: 3}
+    - target: {fileID: 114524864659387228, guid: a5128f70dd3516d4495bbed21f1f3eb7,
+        type: 2}
+      propertyPath: LoseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a7476829a576fd740abe5eac4e6058d6, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5128f70dd3516d4495bbed21f1f3eb7, type: 2}
   m_IsPrefabParent: 0

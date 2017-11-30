@@ -33,6 +33,9 @@ public class PlayerControler : MonoBehaviour
     float MoveSpeed = 5.0f;
 
     [SerializeField]
+    AudioClip LoseSound;
+
+    [SerializeField]
     float JumpForce = 10f;
 
     [SerializeField]
@@ -85,6 +88,8 @@ public class PlayerControler : MonoBehaviour
             if (GameStateText != null)
             {
                 GameStateText.text = "Game Over!";
+                AudioSource.PlayClipAtPoint(LoseSound, transform.position);
+
             }
             Invoke("ReloadLevel", 3f);
 		}
