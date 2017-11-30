@@ -8,6 +8,8 @@ public class Shield : MonoBehaviour {
 
     [SerializeField]
     Image ShieldBar;
+    [SerializeField]
+    Image ShieldIcon;
 
     private ShieldGenerator Generator;
 
@@ -22,9 +24,10 @@ public class Shield : MonoBehaviour {
   public GameObject shield;
 
   void Start() {
-    shieldIsUp = false;
-    shield.SetActive(false);
-
+        shieldIsUp = false;
+        shield.SetActive(false);
+        if (ShieldIcon != null)
+            ShieldIcon.enabled = false;
   }
 
   void Update() {
@@ -45,11 +48,15 @@ public class Shield : MonoBehaviour {
                     Generator.Active = true;
                     Generator = null;
                 }
+                if (ShieldIcon != null)
+                    ShieldIcon.enabled = false;
             }
 
         }
         if (activeShield == 1) {
             hasShield = false;
+            if (ShieldIcon != null)
+                ShieldIcon.enabled = false;
         }
         if (ShieldBar != null)
         {
@@ -61,9 +68,11 @@ public class Shield : MonoBehaviour {
   {
      if (other.gameObject.CompareTag("Shield"))
      {
-       other.gameObject.SetActive(false);
-       Generator = other.gameObject.transform.parent.gameObject.GetComponent<ShieldGenerator>();
-       hasShield = true;
+            other.gameObject.SetActive(false);
+            Generator = other.gameObject.transform.parent.gameObject.GetComponent<ShieldGenerator>();
+            hasShield = true;
+            if (ShieldIcon != null)
+                ShieldIcon.enabled = true;
      }
    }
 
