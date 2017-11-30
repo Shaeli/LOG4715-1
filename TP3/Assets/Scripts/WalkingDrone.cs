@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WalkingDrone : MonoBehaviour {
 
-    [SerializeField] private Transform player;
     [SerializeField] private float speed = 1f;
     [SerializeField] private Transform leftExtremety;
     [SerializeField] private Transform rightExtremety;
@@ -14,6 +13,8 @@ public class WalkingDrone : MonoBehaviour {
 
     private float extremityPosition;
     private bool flipped;
+
+    public Transform player { get; set; }
 
     // Use this for initialization
     void Start ()

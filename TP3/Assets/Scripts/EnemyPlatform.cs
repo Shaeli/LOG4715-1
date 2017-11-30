@@ -18,10 +18,22 @@ public class EnemyPlatform : MonoBehaviour {
 		
 	}
 
-    void OnCollisionStay(Collision coll)
+    private void OnCollisionEnter(Collision coll)
     {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
             playerArrived = true;
+            transform.GetComponentInChildren<WalkingDrone>().player = coll.gameObject.transform;
+        }
+    }
+
+    private void OnCollisionStay(Collision coll)
+    {
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Player") && !playerArrived)
+        {
+            playerArrived = true;
+            transform.GetComponentInChildren<WalkingDrone>().player = coll.gameObject.transform;
+        }
     }
 
     private void OnCollisionExit(Collision coll)
