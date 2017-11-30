@@ -9,6 +9,8 @@ public class RobotPiecePickUp : MonoBehaviour {
     [SerializeField]
     int TotalNbPieces = 5;
     [SerializeField]
+    AudioClip Winsound;
+    [SerializeField]
     float DelayLoad = 3f;
     [SerializeField]
     Text GameStateText;
@@ -31,6 +33,7 @@ public class RobotPiecePickUp : MonoBehaviour {
             if (GameStateText != null)
             {
                 GameStateText.text = "Level Completed!";
+                AudioSource.PlayClipAtPoint(Winsound, transform.position);
             }
             Invoke("LoadMenu", DelayLoad);
         }

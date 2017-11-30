@@ -9,6 +9,7 @@ public class PlayerHPShield : MonoBehaviour {
 
     [SerializeField][Range(0,1)]
     float HealthBarAnimationRate = 0.5f;
+    [SerializeField] AudioClip Damage;
 
     public Image HealthBar;
 
@@ -56,6 +57,7 @@ public class PlayerHPShield : MonoBehaviour {
         if (wasDamaged != null)
         {
             GetDamaged(wasDamaged);
+            AudioSource.PlayClipAtPoint(Damage, transform.position);
         }
 
         if (!canBeDamaged && CurrentHP > 0)

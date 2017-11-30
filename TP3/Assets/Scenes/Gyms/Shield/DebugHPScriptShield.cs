@@ -8,6 +8,9 @@ public class DebugHPScriptShield : MonoBehaviour {
 
     public int ReloadDelay = 3;
     public Text GameStateText;
+    [SerializeField]
+    AudioClip LoseSound;
+    
 
     private bool isDead = false;
     
@@ -31,6 +34,7 @@ public class DebugHPScriptShield : MonoBehaviour {
         if (GameStateText != null)
         {
             GameStateText.text = "Game Over!";
+            AudioSource.PlayClipAtPoint(LoseSound, transform.position);
         }
         Decompose d = GetComponent<Decompose>();
         if (d != null)

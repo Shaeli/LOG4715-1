@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -19646,6 +19646,21 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114876106717106576, guid: a5128f70dd3516d4495bbed21f1f3eb7,
+        type: 2}
+      propertyPath: Winsound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ffb3fd6a29924343aef0345a158fe53, type: 3}
+    - target: {fileID: 114932676016873214, guid: a5128f70dd3516d4495bbed21f1f3eb7,
+        type: 2}
+      propertyPath: LoseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a7476829a576fd740abe5eac4e6058d6, type: 3}
+    - target: {fileID: 114818147339718456, guid: a5128f70dd3516d4495bbed21f1f3eb7,
+        type: 2}
+      propertyPath: Damage
+      value: 
+      objectReference: {fileID: 8300000, guid: ac150ccf1d0dab4408c54e0476fdf2b1, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5128f70dd3516d4495bbed21f1f3eb7, type: 2}
   m_IsPrefabParent: 0
