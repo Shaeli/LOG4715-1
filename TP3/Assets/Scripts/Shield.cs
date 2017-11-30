@@ -9,6 +9,8 @@ public class Shield : MonoBehaviour {
     [SerializeField]
     Image ShieldBar;
 
+    private ShieldGenerator Generator;
+
   public int timeShield = 100;
 
   private int activeShield;
@@ -34,10 +36,15 @@ public class Shield : MonoBehaviour {
             activeShield--;
         }
         if (hasShield == true) {
-            if (Input.GetButtonDown("Ability") && activeShield == 0) {
-            shield.SetActive(true);
-            shieldIsUp = true;
-            activeShield = timeShield;
+            if (Input.GetButtonDown("Shield" + GetComponent<Multiplayer>().PlayerNumber) && activeShield == 0) {
+                shield.SetActive(true);
+                shieldIsUp = true;
+                activeShield = timeShield;
+                if (Generator != null)
+                {
+                    Generator.Active = true;
+                    Generator = null;
+                }
             }
 
         }
@@ -55,6 +62,7 @@ public class Shield : MonoBehaviour {
      if (other.gameObject.CompareTag("Shield"))
      {
        other.gameObject.SetActive(false);
+       Generator = other.gameObject.transform.parent.gameObject.GetComponent<ShieldGenerator>();
        hasShield = true;
      }
    }

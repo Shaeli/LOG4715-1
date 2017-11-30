@@ -7,6 +7,7 @@ public class MultiplayerCamera : MonoBehaviour {
     [SerializeField] private Transform player1;
     [SerializeField] private Transform player2;
     [SerializeField] private float zoomFactor;
+    [SerializeField] float verticalOffset;
 
     private float initialZoom;
     private float initialDistance;
@@ -40,6 +41,7 @@ public class MultiplayerCamera : MonoBehaviour {
         else
             cameraDestination = middle - transform.forward * initialZoom;
 
+        cameraDestination.y += verticalOffset;
         transform.position = Vector3.Slerp(transform.position, cameraDestination, Time.deltaTime);
 
     }
