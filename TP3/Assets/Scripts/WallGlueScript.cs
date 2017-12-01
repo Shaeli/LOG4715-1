@@ -47,7 +47,7 @@ public class WallGlueScript : MonoBehaviour {
         if (wallJump && !GetComponent<PlayerControler>()._Grounded)
         {
 
-            pControler.decompte = 10;
+            pControler.decompte = 8;
             if (pControler._Flipped)
             {
 
