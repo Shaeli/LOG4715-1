@@ -41,6 +41,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Gyms/PiledJump/Gym_PiledJump.unity
     guid: bf6bae0ffca9a5841a8f58cc824b4869
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Levels/MultiplayerScene.unity
     guid: f695bfb0d7d31014f8c92e82b154ba9b

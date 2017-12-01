@@ -14,7 +14,15 @@ public class MultiplayerCamera : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Vector3 middle = (player1.position + player2.position) * 0.5f;
+        Vector3 middle;
+        if (player2 != null)
+        {
+            middle = (player1.position + player2.position) * 0.5f;
+        }
+        else
+        {
+            middle = player1.position;
+        }
 
         initialZoom = (middle - transform.position).magnitude;
 
@@ -27,11 +35,21 @@ public class MultiplayerCamera : MonoBehaviour {
 
     void FollowPlayers()
     {
-        // Middle point 
-        Vector3 middle = (player1.position + player2.position) * 0.5f;
+        Vector3 middle;
+        float zoomDistance;
+        if (player2 != null)
+        {
+            // Middle point 
+            middle = (player1.position + player2.position) * 0.5f;
 
-        // To calculate the zoom of the camera
-        float zoomDistance = (player1.position - player2.position).magnitude * zoomFactor;
+            // To calculate the zoom of the camera
+            zoomDistance = (player1.position - player2.position).magnitude * zoomFactor;
+        }
+        else
+        {
+            middle = player1.position;
+            zoomDistance = zoomFactor;
+        }
 
         // Move camera a certain distance
         Vector3 cameraDestination;

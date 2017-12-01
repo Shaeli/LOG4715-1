@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Teleporters : MonoBehaviour {
 
-
+    [SerializeField] AudioClip teleportSound;
 	[SerializeField] Vector3 initialPosition;
 
 
@@ -12,7 +12,8 @@ public class Teleporters : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
-			other.transform.position = initialPosition;
+            AudioSource.PlayClipAtPoint(teleportSound, transform.position);
+            other.transform.position = initialPosition;
 		}
 	}
 }
