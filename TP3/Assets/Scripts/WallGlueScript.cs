@@ -52,7 +52,7 @@ public class WallGlueScript : MonoBehaviour {
             {
 
                 GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 2f, 2f) * jumpForce) / 1.5f);
+                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 2f, 1.5f) * jumpForce) / 1.5f);
                 pControler.FlipCharacter(1);
 
             }
@@ -60,7 +60,7 @@ public class WallGlueScript : MonoBehaviour {
             {
 
                 GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 2f, -2f) * jumpForce) / 1.5f);
+                GetComponent<Rigidbody>().AddForce((new Vector3(0f, 2f, -1.5f) * jumpForce) / 1.5f);
                 pControler.FlipCharacter(-1);
             }
             wallJump = false;
