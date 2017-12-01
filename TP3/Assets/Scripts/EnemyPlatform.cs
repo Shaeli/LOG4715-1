@@ -20,8 +20,10 @@ public class EnemyPlatform : MonoBehaviour {
 
     void OnCollisionStay(Collision coll)
     {
-        if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Player")) { 
             playerArrived = true;
+            transform.GetComponentInChildren<WalkingDrone>().player = coll.gameObject.transform;
+        }
     }
 
     private void OnCollisionExit(Collision coll)
