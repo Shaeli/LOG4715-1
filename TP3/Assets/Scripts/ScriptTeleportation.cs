@@ -19,6 +19,8 @@ public class ScriptTeleportation : MonoBehaviour
     bool coolDown;
     int playerNum = 0;
 
+    Vector3 rayCastStartPoint;
+
     //Distance téléportation
     [SerializeField] float TeleportationDistance = 5f;
 
@@ -37,6 +39,7 @@ public class ScriptTeleportation : MonoBehaviour
     // Vérifie les entrées de commandes du joueur
     void Update()
     {
+        rayCastStartPoint = new Vector3(transform.position.x, (transform.position.y + transform.localScale.y / 2), transform.position.z);
         TeleportationCoolDown();
         CheckTeleportation();
     }
@@ -46,7 +49,7 @@ public class ScriptTeleportation : MonoBehaviour
       if (!coolDown)
       {
             DisplayTpGhost();
-            if (!Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance , myLayerMask))
+            if (!Physics.Raycast(rayCastStartPoint, new Vector3(0, 0, transform.forward.z), TeleportationDistance , myLayerMask))
             {
                 
                 if (Input.GetButtonUp("Ability" + playerNum))
@@ -82,13 +85,13 @@ public class ScriptTeleportation : MonoBehaviour
 
     void DisplayTpGhost()
     {
-        if (Input.GetButton("Ability" + playerNum) && !Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance, myLayerMask))
+        if (Input.GetButton("Ability" + playerNum) && !Physics.Raycast(rayCastStartPoint, new Vector3(0, 0, transform.forward.z), TeleportationDistance, myLayerMask))
         {
             TPGhost.transform.position = transform.position + new Vector3(0, 0, transform.forward.z * TeleportationDistance);
             TPGhost.SetActive(true);
             TPGhostR.SetActive(false);
         }
-        else if (Input.GetButton("Ability" + playerNum) && Physics.Raycast(transform.position, new Vector3(0, 0, transform.forward.z), TeleportationDistance, myLayerMask))
+        else if (Input.GetButton("Ability" + playerNum) && Physics.Raycast(rayCastStartPoint, new Vector3(0, 0, transform.forward.z), TeleportationDistance, myLayerMask))
         {
             TPGhostR.transform.position = transform.position + new Vector3(0, 0, transform.forward.z * TeleportationDistance);
             TPGhost.SetActive(false);
