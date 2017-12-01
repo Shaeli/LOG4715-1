@@ -20,7 +20,6 @@ public class WallGlueScript : MonoBehaviour {
 
     bool coolDown;
     void Start () {
-        jumpForce = 200;
         wallCheck = transform.Find("WallCheck");
         pControler = gameObject.GetComponent<PlayerControler>();
         coolDown = false;

@@ -6268,7 +6268,7 @@ MonoBehaviour:
     m_Bits: 1024
   GlueTime: 3
   RefillSpeed: 1
-  jumpForce: 300
+  jumpForce: 250
 --- !u!114 &359417574
 MonoBehaviour:
   m_ObjectHideFlags: 0
