@@ -12779,19 +12779,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4839158052341388, guid: caf24919a7ebf9f43954c3ef972ca025, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.50000024
-      objectReference: {fileID: 0}
-    - target: {fileID: 4839158052341388, guid: caf24919a7ebf9f43954c3ef972ca025, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.50000024
-      objectReference: {fileID: 0}
-    - target: {fileID: 114367945916560276, guid: caf24919a7ebf9f43954c3ef972ca025,
-        type: 2}
-      propertyPath: teleportSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 5596fb3c2562d8347926e4ab3e9c2ab7, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: caf24919a7ebf9f43954c3ef972ca025, type: 2}
   m_IsPrefabParent: 0
