@@ -7,7 +7,7 @@ public class SlideWall : Activable {
     [SerializeField]
     GameObject Wall;
     [SerializeField]
-    float SlideRate = 0.5f;
+    public float SlideRate = 0.5f;
     [SerializeField]
     bool StartingState;
 

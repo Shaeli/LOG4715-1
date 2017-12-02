@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PushPlayer : MonoBehaviour {
 
+    private float offSet;
+
 	// Use this for initialization
 	void Start () {
-		
+        offSet = transform.GetComponentInParent<SlideWall>().SlideRate;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +21,6 @@ public class PushPlayer : MonoBehaviour {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             coll.transform.parent.parent = transform;
-            coll.gameObject.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0, 0, 5), ForceMode.Impulse);
         }
     }
 
@@ -27,7 +28,8 @@ public class PushPlayer : MonoBehaviour {
     {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            coll.gameObject.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0, 0, 5), ForceMode.Impulse);
+            Vector3 dest = new Vector3(coll.transform.position.x, coll.transform.position.y, transform.position.z + 1f);
+            coll.GetComponentInChildren<Rigidbody>().MovePosition(Vector3.Slerp(coll.transform.position, dest, Time.deltaTime));
         }
     }
 
