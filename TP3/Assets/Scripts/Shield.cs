@@ -10,6 +10,10 @@ public class Shield : MonoBehaviour {
     Image ShieldBar;
     [SerializeField]
     Image ShieldIcon;
+    [SerializeField]
+    AudioClip Shieldpicked;
+    [SerializeField]
+    AudioClip Shieldactivated;
 
     private ShieldGenerator Generator;
 
@@ -40,6 +44,7 @@ public class Shield : MonoBehaviour {
         }
         if (hasShield == true) {
             if (Input.GetButtonDown("Shield" + GetComponent<Multiplayer>().PlayerNumber) && activeShield == 0) {
+                AudioSource.PlayClipAtPoint(Shieldactivated, transform.position);
                 shield.SetActive(true);
                 shieldIsUp = true;
                 activeShield = timeShield;
@@ -68,6 +73,7 @@ public class Shield : MonoBehaviour {
   {
      if (other.gameObject.CompareTag("Shield"))
      {
+            AudioSource.PlayClipAtPoint(Shieldpicked, transform.position);
             other.gameObject.SetActive(false);
             Generator = other.gameObject.transform.parent.gameObject.GetComponent<ShieldGenerator>();
             hasShield = true;

@@ -1733,6 +1733,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224404054552943730, guid: 32a61b4003fa9124dbddd847a1fb6cf9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -10.599976
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32a61b4003fa9124dbddd847a1fb6cf9, type: 2}
   m_IsPrefabParent: 0
@@ -2226,6 +2231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShieldBar: {fileID: 1997253466}
   ShieldIcon: {fileID: 462633054}
+  Shieldpicked: {fileID: 8300000, guid: 7b9b55a31747f0c4fbc5eeb4165485e1, type: 3}
+  Shieldactivated: {fileID: 8300000, guid: 18bda7244b7d14b4893432d7c94c2c64, type: 3}
   timeShield: 300
   shield: {fileID: 960083921}
 --- !u!1 &241752991
@@ -24456,6 +24463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShieldBar: {fileID: 851005506}
   ShieldIcon: {fileID: 478259224}
+  Shieldpicked: {fileID: 8300000, guid: 7b9b55a31747f0c4fbc5eeb4165485e1, type: 3}
+  Shieldactivated: {fileID: 8300000, guid: 18bda7244b7d14b4893432d7c94c2c64, type: 3}
   timeShield: 300
   shield: {fileID: 1628165986}
 --- !u!1 &1628165986
