@@ -14,6 +14,7 @@ public class Teleporters : MonoBehaviour {
 		{
             AudioSource.PlayClipAtPoint(teleportSound, transform.position);
             other.transform.position = initialPosition;
+            other.GetComponentInChildren<ParticleSystem>().Play();
 		}
 	}
 }

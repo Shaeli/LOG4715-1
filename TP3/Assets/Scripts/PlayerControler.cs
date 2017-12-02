@@ -174,6 +174,11 @@ public class PlayerControler : MonoBehaviour
         // On s'assure de bien être en contact avec le sol ou le player
         if ((WhatIsGround & (1 << coll.gameObject.layer)) == 0)
             return;
+        else
+        {
+            _Grounded = true;
+            _Anim.SetBool("Grounded", _Grounded);
+        }
 
         // On verifie si le joueur est en contact avec un autre joueur ou pas (pour saut empile)
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
