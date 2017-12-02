@@ -5,6 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour {
 
     [SerializeField] private Transform turret;
+    [SerializeField] private AudioClip shootingSound;
     private LineRenderer lr;
     private ParticleSystem ps;
     [SerializeField] private float shootInterval = 3f;
@@ -85,6 +86,7 @@ public class Laser : MonoBehaviour {
         if (!ps.isPlaying)
         {
             ps.Play();
+            AudioSource.PlayClipAtPoint(shootingSound, transform.position, 0.5f);
         }
     }
 
