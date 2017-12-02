@@ -19,7 +19,7 @@ public class PushPlayer : MonoBehaviour {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             coll.transform.parent.parent = transform;
-            //coll.gameObject.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0, 0, 2), ForceMode.Force);
+            coll.gameObject.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0, 0, 5), ForceMode.Impulse);
         }
     }
 
@@ -27,7 +27,7 @@ public class PushPlayer : MonoBehaviour {
     {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            coll.gameObject.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0, 0, 2), ForceMode.Impulse);
+            coll.gameObject.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0, 0, 5), ForceMode.Impulse);
         }
     }
 
@@ -35,7 +35,7 @@ public class PushPlayer : MonoBehaviour {
     {
         if (coll.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            coll.transform.parent.parent = transform;
+            coll.transform.parent.parent = null;
         }
     }
 
