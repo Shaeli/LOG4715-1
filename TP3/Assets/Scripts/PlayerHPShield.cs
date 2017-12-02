@@ -57,7 +57,6 @@ public class PlayerHPShield : MonoBehaviour {
         if (wasDamaged != null)
         {
             GetDamaged(wasDamaged);
-            AudioSource.PlayClipAtPoint(Damage, transform.position);
         }
 
         if (!canBeDamaged && CurrentHP > 0)
@@ -87,7 +86,7 @@ public class PlayerHPShield : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         DamagingObject damagingObject = collision.gameObject.GetComponent<DamagingObject>();
-        if (damagingObject != null && (gameObject.GetComponent<Shield>() == null || !gameObject.GetComponent<Shield>().shieldIsUp) && canBeDamaged)
+        if (damagingObject != null && canBeDamaged)
         {
             wasDamaged = damagingObject;
         }
@@ -100,7 +99,7 @@ public class PlayerHPShield : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         DamagingObject damagingObject = other.gameObject.GetComponent<DamagingObject>();
-        if (damagingObject != null && (gameObject.GetComponent<Shield>() == null || !gameObject.GetComponent<Shield>().shieldIsUp) && canBeDamaged)
+        if (damagingObject != null && canBeDamaged)
         {
             wasDamaged = damagingObject;
         }
@@ -112,10 +111,17 @@ public class PlayerHPShield : MonoBehaviour {
     /// <param name="damagingObject"></param>
     private void GetDamaged(DamagingObject damagingObject)
     {
-        CurrentHP -= damagingObject.Damage;
-        wasDamaged = null;
-        canBeDamaged = false;
-        Invoke("EnableCanBeDamaged", DamageCooldown);
+        if (gameObject.GetComponent<Shield>() == null || !gameObject.GetComponent<Shield>().shieldIsUp)
+        {
+            AudioSource.PlayClipAtPoint(Damage, transform.position);
+            CurrentHP -= damagingObject.Damage;
+            wasDamaged = null;
+            canBeDamaged = false;
+            Invoke("EnableCanBeDamaged", DamageCooldown);
+        } else
+        {
+            wasDamaged = null;
+        }
     }
 
     private void EnableCanBeDamaged()
