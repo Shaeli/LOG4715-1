@@ -8728,7 +8728,7 @@ Prefab:
     - target: {fileID: 114488856455718208, guid: c1e52d50e573b73429b30e69f00b6c0b,
         type: 2}
       propertyPath: StartingState
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1585690074946058, guid: c1e52d50e573b73429b30e69f00b6c0b, type: 2}
       propertyPath: m_Name
@@ -44821,7 +44821,7 @@ Prefab:
     - target: {fileID: 114488856455718208, guid: c1e52d50e573b73429b30e69f00b6c0b,
         type: 2}
       propertyPath: StartingState
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1585690074946058, guid: c1e52d50e573b73429b30e69f00b6c0b, type: 2}
       propertyPath: m_Name
