@@ -2337,7 +2337,6 @@ MonoBehaviour:
     m_Bits: 3840
   PiledJumpMultiplier: 1.5
   LowerBound: -50
-  FeetCollider: {fileID: 0}
 --- !u!114 &238427540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2426,7 +2425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb1394e620f785459eed1a970313b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolDownAffichage: 10
+  CoolDownAffichage: 60
   images:
   - {fileID: 780670158}
   - {fileID: 1584118931}
@@ -27332,7 +27331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb1394e620f785459eed1a970313b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolDownAffichage: 10
+  CoolDownAffichage: 60
   images:
   - {fileID: 1835252588}
   - {fileID: 2114863071}
@@ -27421,7 +27420,6 @@ MonoBehaviour:
     m_Bits: 3840
   PiledJumpMultiplier: 1.5
   LowerBound: -50
-  FeetCollider: {fileID: 0}
 --- !u!114 &1627147517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27510,7 +27508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a9d1c5e2ce8b04ba098b13baab4807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FloatingTime: 3
+  FloatingTime: 5
   RefillSpeed: 1
   FloatingImagefill: {fileID: 1466980003}
 --- !u!114 &1627147523
