@@ -45,7 +45,7 @@ public class ScriptFloating : MonoBehaviour {
 
     void Float()
     {
-        if (Input.GetButton("Ability" + GetComponent<Multiplayer>().PlayerNumber) && canFloat && !transform.GetComponent<PlayerControler>()._Grounded)
+        if (Input.GetButton("Ability" + GetComponent<Multiplayer>().PlayerNumber) && canFloat && !transform.GetComponent<PlayerControler>()._Floor)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentFloatingTime -= Time.deltaTime;
