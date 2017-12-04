@@ -45,13 +45,11 @@ public class ScriptFloating : MonoBehaviour {
 
     void Float()
     {
-        if (Input.GetButton("Ability" + GetComponent<Multiplayer>().PlayerNumber) && canFloat)
+        if (Input.GetButton("Ability" + GetComponent<Multiplayer>().PlayerNumber) && canFloat && !transform.GetComponent<PlayerControler>()._Grounded)
         {
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             currentFloatingTime -= Time.deltaTime;
             FloatingImagefill.GetComponent<Image>().fillAmount = currentFloatingTime / FloatingTime;
-            // Consider player as floor when he is floating
-            gameObject.layer = LayerMask.NameToLayer("Floor");
             coolDown = false;
 
             // Dseactiver la flottaison jusqu'a la fin du cooldown
@@ -64,8 +62,6 @@ public class ScriptFloating : MonoBehaviour {
         {
             coolDown = true;
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-            // Set layer back to normal
-            gameObject.layer = LayerMask.NameToLayer("Default");
         }
     }
 
