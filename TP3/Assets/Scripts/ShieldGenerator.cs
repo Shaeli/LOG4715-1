@@ -8,6 +8,8 @@ public class ShieldGenerator : MonoBehaviour {
     [SerializeField] float DelayBetweenGeneration;
 
     public bool Active = true;
+    public int MaxCount = 2;
+    private int count = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -18,10 +20,11 @@ public class ShieldGenerator : MonoBehaviour {
     {
         while (true)
         {
-            if (Active)
+            if (Active && count < MaxCount)
             {
                 Instantiate(ShieldPillPrefab, transform.position + Vector3.up, Quaternion.identity, this.transform);
                 Active = false;
+                count++;
             }
             yield return new WaitForSeconds(DelayBetweenGeneration);
         }
