@@ -46130,6 +46130,11 @@ Prefab:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 114501435835095704, guid: 081f27b4fa99b6745b7384517e32ac9a,
+        type: 2}
+      propertyPath: IsReusable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 081f27b4fa99b6745b7384517e32ac9a, type: 2}
   m_IsPrefabParent: 0
